@@ -26,9 +26,9 @@ public class Pokemon {
 	private Integer attaque;
 	@Column(name="defense")
 	private Integer defense;
-	@Column(name="attaque")
+	@Column(name="attaque_spe")
 	private Integer attaqueSpe;
-	@Column(name="defenseSpe")
+	@Column(name="defense_spe")
 	private Integer defenseSpe;
 	@Column(name="speed")
 	private Integer speed;

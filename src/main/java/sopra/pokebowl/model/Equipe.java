@@ -29,7 +29,7 @@ public class Equipe {
 	@ManyToOne
 	@JoinColumn(name="id_utilisateur")
 	private Utilisateur utilisateurEquipeSauv;
-	@OneToOne(mappedBy="derniere_equipe")
+	@OneToOne(mappedBy="derniereEquipe")
 	private Utilisateur utilisateurDeniereEquipe;
 	@OneToMany(mappedBy="equipe")
 	private List<MonPokemon> listPokemons;
