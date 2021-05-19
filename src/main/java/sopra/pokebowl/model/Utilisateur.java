@@ -8,9 +8,12 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "utilisateur")
@@ -28,12 +31,12 @@ public class Utilisateur {
 	private String motDePasse;
 	@Embedded
 	private Statistique statistique;
-	@ManyToOne
-	@Column(name = "derniere_equipe_id")
+	@OneToOne
+	@JoinColumn(name = "derniere_equipe_id")
 	private Equipe derniereEquipe;
 	@OneToMany(mappedBy = "joueur1")
 	private List<Salon> salons = new ArrayList<Salon>();
-	@OneToMany(mappedBy = "joueur2")
+	@OneToMany(mappedBy = "utilisateurEquipeSauv")
 	private List<Equipe> equipesSauvegardees = new ArrayList<Equipe>();
 	
 	public Utilisateur() {

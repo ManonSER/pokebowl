@@ -46,8 +46,6 @@ public class MonPokemon {
 		this(null, null, null, null, null, null, null, null);
 	}
 	
-	
-
 	public MonPokemon(Integer ordre, Equipe equipe, Pokemon pokeReference, Attaque attaque1, Attaque attaque2,
 			Attaque attaque3, Attaque attaque4, PokemonMatch pokeMatch) {
 		super();

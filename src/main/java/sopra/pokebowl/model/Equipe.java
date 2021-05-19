@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="equipe")
@@ -29,7 +30,7 @@ public class Equipe {
 	@ManyToOne
 	@JoinColumn(name="id_utilisateur")
 	private Utilisateur utilisateurEquipeSauv;
-	@OneToOne(mappedBy="derniere_equipe")
+	@OneToOne(mappedBy="derniereEquipe")
 	private Utilisateur utilisateurDeniereEquipe;
 	@OneToMany(mappedBy="equipe")
 	private List<MonPokemon> listPokemons;
