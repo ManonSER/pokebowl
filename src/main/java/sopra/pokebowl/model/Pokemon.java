@@ -53,13 +53,10 @@ public class Pokemon {
 	private TypeClass type2;
 	
 	
-	
 	public Pokemon() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	public Pokemon(Long id, String nom, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
 			Integer defenseSpe, Integer speed, Float taille, Float poids, Integer generation, String avatar,
@@ -79,8 +76,6 @@ public class Pokemon {
 		this.avatar = avatar;
 		this.description = description;
 	}
-
-
 
 	public Long getId() {
 		return id;
