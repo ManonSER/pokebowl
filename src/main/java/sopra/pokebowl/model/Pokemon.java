@@ -1,9 +1,15 @@
 package sopra.pokebowl.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,9 +26,9 @@ public class Pokemon {
 	private Integer attaque;
 	@Column(name="defense")
 	private Integer defense;
-	@Column(name="attaque")
+	@Column(name="attaque_spe")
 	private Integer attaqueSpe;
-	@Column(name="defenseSpe")
+	@Column(name="defense_spe")
 	private Integer defenseSpe;
 	@Column(name="speed")
 	private Integer speed;
@@ -36,6 +42,15 @@ public class Pokemon {
 	private String avatar;
 	@Column(name="description", length = 255)
 	private String description;
+	@ManyToMany
+	@JoinTable(name = "attaque_pokemon", joinColumns = @JoinColumn(name = "attaque_id"), inverseJoinColumns = @JoinColumn(name = "pokemon_id"))
+	private List<Attaque> attaques;
+	@OneToOne
+	@JoinColumn(name = "type1")
+	private TypeClass type1;
+	@OneToOne
+	@JoinColumn(name = "type2")
+	private TypeClass type2;
 	
 	
 	
@@ -219,6 +234,42 @@ public class Pokemon {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+
+	public List<Attaque> getAttaques() {
+		return attaques;
+	}
+
+
+
+	public void setAttaques(List<Attaque> attaques) {
+		this.attaques = attaques;
+	}
+
+
+
+	public TypeClass getType1() {
+		return type1;
+	}
+
+
+
+	public void setType1(TypeClass type1) {
+		this.type1 = type1;
+	}
+
+
+
+	public TypeClass getType2() {
+		return type2;
+	}
+
+
+
+	public void setType2(TypeClass type2) {
+		this.type2 = type2;
 	}
 	
 	

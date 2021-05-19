@@ -16,17 +16,10 @@ public class TypeClass {
 	private TypeEnum type;
 	@Column(name="avatar")
 	private String avatar;
-	public Long getId() {
-		return id;
-	}
-	
-	
 	
 	public TypeClass() {
 		super();
 	}
-
-
 
 	public TypeClass(Long id, TypeEnum type, String avatar) {
 		super();
@@ -35,8 +28,9 @@ public class TypeClass {
 		this.avatar = avatar;
 	}
 
-
-
+	public Long getId() {
+		return id;
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}

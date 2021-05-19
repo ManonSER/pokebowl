@@ -1,13 +1,18 @@
 package sopra.pokebowl.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TypeClass")
+@Table(name = "Attaque")
 public class Attaque {
 	@Id
 	@GeneratedValue
@@ -20,11 +25,15 @@ public class Attaque {
 	private Integer pointDePouvoir;
 	@Column(name="puissance")
 	private Integer puissance;
-	@Column(name="precision")
-	private Float precision;
+	@Column(name="precision_attaque")
+	private Float precisionAttaque;
 	@Column(name="description", length = 255)
 	private String description;
-	
+	@ManyToMany(mappedBy = "attaques")
+	private List<Pokemon> pokemons;
+	@OneToOne
+	@JoinColumn(name = "type_attaque")
+	private TypeClass typeAttaque;
 	
 	
 	public Attaque() {
@@ -42,7 +51,7 @@ public class Attaque {
 		this.categorie = categorie;
 		this.pointDePouvoir = pointDePouvoir;
 		this.puissance = puissance;
-		this.precision = precision;
+		this.precisionAttaque = precision;
 		this.description = description;
 	}
 
@@ -108,14 +117,14 @@ public class Attaque {
 
 
 
-	public Float getPrecision() {
-		return precision;
+	public Float getPrecisionAttaque() {
+		return precisionAttaque;
 	}
 
 
 
-	public void setPrecision(Float precision) {
-		this.precision = precision;
+	public void setPrecisionAttaque(Float precision) {
+		this.precisionAttaque = precision;
 	}
 
 
@@ -128,6 +137,30 @@ public class Attaque {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+
+	public List<Pokemon> getPokemons() {
+		return pokemons;
+	}
+
+
+
+	public void setPokemons(List<Pokemon> pokemons) {
+		this.pokemons = pokemons;
+	}
+
+
+
+	public TypeClass getTypeAttaque() {
+		return typeAttaque;
+	}
+
+
+
+	public void setTypeAttaque(TypeClass typeAttaque) {
+		this.typeAttaque = typeAttaque;
 	}
 	
 	

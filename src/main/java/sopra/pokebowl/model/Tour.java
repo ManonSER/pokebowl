@@ -1,12 +1,38 @@
 package sopra.pokebowl.model;
 
-public class Tour {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "tour")
+public class Tour {
+	@Id
+	@GeneratedValue
 	private Long id;
+	@Column(name = "actionJoueur1")
 	private Action actionJoueur1;
+	@Column(name = "actionJoueur2")
 	private Action actionJoueur2;
+	@Column(name = "attaquePokemon1")
 	private String attaquePokemon1;
+	@Column(name = "attaquePokemon2")
 	private String attaquePokemon2;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "combat_id")
+	private Combat combat;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pokemonMatch1_id")
+	private PokemonMatch pokemonMatch1;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pokemonMatch2_id")
+	private PokemonMatch pokemonMatch2;
 	
 	public Tour() {
 		super();
@@ -50,5 +76,30 @@ public class Tour {
 	}
 	public void setAttaquePokemon2(String attaquePokemon2) {
 		this.attaquePokemon2 = attaquePokemon2;
+	}
+
+	public Combat getCombat() {
+		return combat;
+	}
+
+	public void setCombat(Combat combat) {
+		this.combat = combat;
+	}
+
+	public PokemonMatch getPokemonMatch1() {
+		return pokemonMatch1;
+	}
+
+	public void setPokemonMatch1(PokemonMatch pokemonMatch1) {
+		this.pokemonMatch1 = pokemonMatch1;
+	}
+
+	public PokemonMatch getPokemonMatch2() {
+		return pokemonMatch2;
+	}
+
+	public void setPokemonMatch2(PokemonMatch pokemonMatch2) {
+		this.pokemonMatch2 = pokemonMatch2;
 	}	
+	
 }

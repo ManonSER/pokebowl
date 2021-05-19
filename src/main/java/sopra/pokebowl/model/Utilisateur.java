@@ -1,11 +1,43 @@
 package sopra.pokebowl.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "utilisateur")
 public class Utilisateur {
+	@Id
+	@GeneratedValue
 	private Long id;
+	@Column(name = "pseudo")
 	private String pseudo;
+	@Column(name = "email")
 	private String email;
+	@Column(name = "avatar")
 	private String avatar;
+	@Column(name = "mot_de_passe")
 	private String motDePasse;
+	@Embedded
+	private Statistique statistique;
+	@OneToOne
+	@JoinColumn(name = "derniere_equipe_id")
+	private Equipe derniereEquipe;
+	@OneToMany(mappedBy = "joueur1")
+	private List<Salon> salons = new ArrayList<Salon>();
+	@OneToMany(mappedBy = "utilisateurEquipeSauv")
+	private List<Equipe> equipesSauvegardees = new ArrayList<Equipe>();
 	
 	public Utilisateur() {
 		super();
@@ -58,5 +90,37 @@ public class Utilisateur {
 
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
+	}
+
+	public Statistique getStatistique() {
+		return statistique;
+	}
+
+	public void setStatistique(Statistique statistique) {
+		this.statistique = statistique;
+	}
+
+	public Equipe getDerniereEquipe() {
+		return derniereEquipe;
+	}
+
+	public void setDerniereEquipe(Equipe derniereEquipe) {
+		this.derniereEquipe = derniereEquipe;
+	}
+
+	public List<Salon> getSalons() {
+		return salons;
+	}
+
+	public void setSalons(List<Salon> salons) {
+		this.salons = salons;
+	}
+
+	public List<Equipe> getEquipesSauvegardees() {
+		return equipesSauvegardees;
+	}
+
+	public void setEquipesSauvegardees(List<Equipe> equipesSauvegardees) {
+		this.equipesSauvegardees = equipesSauvegardees;
 	}
 }
