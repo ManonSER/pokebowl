@@ -1,5 +1,7 @@
 package sopra.pokebowl.model;
 
+import java.util.List;
+
 public class MonPokemon {
 	
 	private Long id;

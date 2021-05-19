@@ -1,20 +1,53 @@
 package sopra.pokebowl.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "pokemonMatch")
 public class PokemonMatch {
 	
+	@Id
+	@GeneratedValue
 	private int numero;
+	@Column(name = "hpMatch")
 	private int hpMatch;
+	@Column(name = "acttackMatch")
 	private int attackMatch;
+	@Column(name = "defenseMatch")
 	private int defenseMatch;
+	@Column(name = "specialAttackMatch")
 	private int specialAttackMatch;
+	@Column(name = "defenseActtackMatch")
 	private int defenseAttackMatch;
+	@Column(name = "speedMatch")
 	private int speedMatch;
+	@Column(name = "numAttaqueActive")
 	private int numAttaqueActive;
+	@Column(name = "statut")
 	private Statut statut;
+	@Column(name = "ppAttaque1")
 	private int ppAttaque1;
+	@Column(name = "ppAttaque2")
 	private int ppAttaque2;
+	@Column(name = "ppAttaque3")
 	private int ppAttaque3;
+	@Column(name = "ppAttaque4")
 	private int ppAttaque4;
+	
+	@OneToOne
+	private MonPokemon monPokemon;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "combat_id")
+	private Combat combat;
+	
 	
 	public PokemonMatch() {
 		super();
@@ -142,4 +175,21 @@ public class PokemonMatch {
 	public void setPpAttaque4(int ppAttaque4) {
 		this.ppAttaque4 = ppAttaque4;
 	}
+
+	public MonPokemon getMonPokemon() {
+		return monPokemon;
+	}
+
+	public void setMonPokemon(MonPokemon monPokemon) {
+		this.monPokemon = monPokemon;
+	}
+
+	public Combat getCombat() {
+		return combat;
+	}
+
+	public void setCombat(Combat combat) {
+		this.combat = combat;
+	}
+	
 }
