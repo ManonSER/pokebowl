@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,10 +23,10 @@ public class Salon {
 	@Column(name = "mot_de_passe")
 	private String motDePasse;
 	@ManyToOne
-	@Column(name = "joueur1_id")
+	@JoinColumn(name = "joueur1_id")
 	private Utilisateur joueur1;
 	@ManyToOne
-	@Column(name = "joueur2_id")
+	@JoinColumn(name = "joueur2_id")
 	private Utilisateur joueur2;
 	@OneToMany(mappedBy = "salon")
 	private List<Combat> combats = new ArrayList<Combat>();

@@ -1,37 +1,33 @@
 package sopra.pokebowl.model;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Statistique {
 	
-	private Long id;
+	@Column(name="pokemon_prefere")
 	private String pokemonPrefere;
+	@Column(name="nbr_victoires")
 	private Integer nbrVictoires;
+	@Column(name="nbr_defaites")
 	private Integer nbrDefaites;
+	@Column(name="nbr_parties_jouees")
 	private Integer nbrPartiesJouees;
 	
-	private Utilisateur utilisateur;
-	
 	public Statistique() {
-		this(null, null, null, null, null);
+		this(null, null, null, null);
 	}
 	
-	public Statistique(Long id, String pokemonPrefere, Integer nbrVictoires, Integer nbrDefaites,
+	public Statistique(String pokemonPrefere, Integer nbrVictoires, Integer nbrDefaites,
 			Integer nbrPartiesJouees) {
 		super();
-		this.id = id;
 		this.pokemonPrefere = pokemonPrefere;
 		this.nbrVictoires = nbrVictoires;
 		this.nbrDefaites = nbrDefaites;
 		this.nbrPartiesJouees = nbrPartiesJouees;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public String getPokemonPrefere() {
 		return pokemonPrefere;
 	}
