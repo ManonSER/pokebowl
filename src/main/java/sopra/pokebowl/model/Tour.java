@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,10 +29,11 @@ public class Tour {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "combat_id")
 	private Combat combat;
-	
-	@Column(name = "pokemonMatch1")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pokemonMatch1")
 	private PokemonMatch pokemonMatch1;
-	@Column(name = "pokemonMatch2")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pokemonMatch2")
 	private PokemonMatch pokemonMatch2;
 	
 	public Tour() {
