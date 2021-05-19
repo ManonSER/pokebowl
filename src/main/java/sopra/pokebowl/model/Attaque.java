@@ -25,15 +25,15 @@ public class Attaque {
 	private Integer pointDePouvoir;
 	@Column(name="puissance")
 	private Integer puissance;
-	@Column(name="precision")
-	private Float precision;
+	@Column(name="precision_attaque")
+	private Float precisionAttaque;
 	@Column(name="description", length = 255)
 	private String description;
 	@ManyToMany(mappedBy = "attaques")
 	private List<Pokemon> pokemons;
 	@OneToOne
-	@JoinColumn(name = "type")
-	private TypeClass type;
+	@JoinColumn(name = "type_attaque")
+	private TypeClass typeAttaque;
 	
 	
 	public Attaque() {
@@ -51,7 +51,7 @@ public class Attaque {
 		this.categorie = categorie;
 		this.pointDePouvoir = pointDePouvoir;
 		this.puissance = puissance;
-		this.precision = precision;
+		this.precisionAttaque = precision;
 		this.description = description;
 	}
 
@@ -117,14 +117,14 @@ public class Attaque {
 
 
 
-	public Float getPrecision() {
-		return precision;
+	public Float getPrecisionAttaque() {
+		return precisionAttaque;
 	}
 
 
 
-	public void setPrecision(Float precision) {
-		this.precision = precision;
+	public void setPrecisionAttaque(Float precision) {
+		this.precisionAttaque = precision;
 	}
 
 
@@ -153,14 +153,14 @@ public class Attaque {
 
 
 
-	public TypeClass getType() {
-		return type;
+	public TypeClass getTypeAttaque() {
+		return typeAttaque;
 	}
 
 
 
-	public void setType(TypeClass type) {
-		this.type = type;
+	public void setTypeAttaque(TypeClass typeAttaque) {
+		this.typeAttaque = typeAttaque;
 	}
 	
 	
