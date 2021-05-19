@@ -8,13 +8,14 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import sopra.pokebowl.Application;
-import sopra.pokebowl.model.Pokemon;
-import sopra.pokebowl.repository.IPokemonRepository;
+import sopra.pokebowl.model.Equipe;
+import sopra.pokebowl.repository.IEquipeRepository;
 
-public class PokemonRepositoryJpa implements IPokemonRepository{
+public class EquipeRepositoryJpa implements IEquipeRepository {
 
-	public List<Pokemon> findAll() {
-		List<Pokemon> pokemons = new ArrayList<Pokemon>();
+	@Override
+	public List<Equipe> findAll() {
+		List<Equipe> equipes = new ArrayList<Equipe>();
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -24,9 +25,9 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			tx = em.getTransaction();
 			tx.begin();
 
-			TypedQuery<Pokemon> query = em.createQuery("select p from Pokemon p", Pokemon.class);
+			TypedQuery<Equipe> query = em.createQuery("select e from Equipe e", Equipe.class);
 
-			pokemons = query.getResultList();
+			equipes = query.getResultList();
 
 			tx.commit();
 		} catch (Exception e) {
@@ -41,11 +42,12 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			}
 		}
 
-		return pokemons;
+		return equipes;
 	}
 
-	public Pokemon findById(Long id) {
-		Pokemon pokemon = null;
+	@Override
+	public Equipe findById(Integer id) {
+		Equipe equipe = null;
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -55,7 +57,7 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			tx = em.getTransaction();
 			tx.begin();
 
-			pokemon = em.find(Pokemon.class, id);
+			equipe = em.find(Equipe.class, id);
 
 			tx.commit();
 		} catch (Exception e) {
@@ -70,7 +72,7 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			}
 		}
 
-		return pokemon;
+		return equipe;
 	}
 
 }
