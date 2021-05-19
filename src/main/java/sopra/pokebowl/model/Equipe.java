@@ -35,16 +35,22 @@ public class Equipe {
 	private List<MonPokemon> listPokemons;
 	
 	public Equipe() {
-		this(null, null, null, null);
+		this(null, null, null, null, null, null, null);
 	}
 	
-	public Equipe(Integer numero, String nom, Boolean favorite, Integer nbrPokemons) {
+	
+	public Equipe(Integer numero, String nom, Boolean favorite, Integer nbrPokemons, Utilisateur utilisateurEquipeSauv,
+			Utilisateur utilisateurDeniereEquipe, List<MonPokemon> listPokemons) {
 		super();
 		this.numero = numero;
 		this.nom = nom;
 		this.favorite = favorite;
 		this.nbrPokemons = nbrPokemons;
+		this.utilisateurEquipeSauv = utilisateurEquipeSauv;
+		this.utilisateurDeniereEquipe = utilisateurDeniereEquipe;
+		this.listPokemons = listPokemons;
 	}
+
 
 	public Integer getNumero() {
 		return numero;
@@ -76,6 +82,36 @@ public class Equipe {
 
 	public void setNbrPokemons(Integer nbrPokemons) {
 		this.nbrPokemons = nbrPokemons;
+	}
+
+
+	public Utilisateur getUtilisateurEquipeSauv() {
+		return utilisateurEquipeSauv;
+	}
+
+
+	public void setUtilisateurEquipeSauv(Utilisateur utilisateurEquipeSauv) {
+		this.utilisateurEquipeSauv = utilisateurEquipeSauv;
+	}
+
+
+	public Utilisateur getUtilisateurDeniereEquipe() {
+		return utilisateurDeniereEquipe;
+	}
+
+
+	public void setUtilisateurDeniereEquipe(Utilisateur utilisateurDeniereEquipe) {
+		this.utilisateurDeniereEquipe = utilisateurDeniereEquipe;
+	}
+
+
+	public List<MonPokemon> getListPokemons() {
+		return listPokemons;
+	}
+
+
+	public void setListPokemons(List<MonPokemon> listPokemons) {
+		this.listPokemons = listPokemons;
 	}
 	
 	

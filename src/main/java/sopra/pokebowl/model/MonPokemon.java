@@ -43,14 +43,25 @@ public class MonPokemon {
 	private PokemonMatch pokeMatch;
 	
 	public MonPokemon() {
-		this(null, null);
+		this(null, null, null, null, null, null, null, null);
 	}
 	
-	public MonPokemon(Long id, Integer ordre) {
+	
+
+	public MonPokemon(Integer ordre, Equipe equipe, Pokemon pokeReference, Attaque attaque1, Attaque attaque2,
+			Attaque attaque3, Attaque attaque4, PokemonMatch pokeMatch) {
 		super();
-		this.id = id;
 		this.ordre = ordre;
+		this.equipe = equipe;
+		this.pokeReference = pokeReference;
+		this.attaque1 = attaque1;
+		this.attaque2 = attaque2;
+		this.attaque3 = attaque3;
+		this.attaque4 = attaque4;
+		this.pokeMatch = pokeMatch;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -67,6 +78,91 @@ public class MonPokemon {
 	public void setOrdre(Integer ordre) {
 		this.ordre = ordre;
 	}
+
+
+
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+
+
+
+	public Pokemon getPokeReference() {
+		return pokeReference;
+	}
+
+
+
+	public void setPokeReference(Pokemon pokeReference) {
+		this.pokeReference = pokeReference;
+	}
+
+
+
+	public Attaque getAttaque1() {
+		return attaque1;
+	}
+
+
+
+	public void setAttaque1(Attaque attaque1) {
+		this.attaque1 = attaque1;
+	}
+
+
+
+	public Attaque getAttaque2() {
+		return attaque2;
+	}
+
+
+
+	public void setAttaque2(Attaque attaque2) {
+		this.attaque2 = attaque2;
+	}
+
+
+
+	public Attaque getAttaque3() {
+		return attaque3;
+	}
+
+
+
+	public void setAttaque3(Attaque attaque3) {
+		this.attaque3 = attaque3;
+	}
+
+
+
+	public Attaque getAttaque4() {
+		return attaque4;
+	}
+
+
+
+	public void setAttaque4(Attaque attaque4) {
+		this.attaque4 = attaque4;
+	}
+
+
+
+	public PokemonMatch getPokeMatch() {
+		return pokeMatch;
+	}
+
+
+
+	public void setPokeMatch(PokemonMatch pokeMatch) {
+		this.pokeMatch = pokeMatch;
+	}
+	
 	
 	
 
