@@ -13,7 +13,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tour")
 public class Tour {
-
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -25,15 +24,14 @@ public class Tour {
 	private String attaquePokemon1;
 	@Column(name = "attaquePokemon2")
 	private String attaquePokemon2;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "combat_id")
 	private Combat combat;
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pokemonMatch1")
+	@JoinColumn(name = "pokemonMatch1_id")
 	private PokemonMatch pokemonMatch1;
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pokemonMatch2")
+	@JoinColumn(name = "pokemonMatch2_id")
 	private PokemonMatch pokemonMatch2;
 	
 	public Tour() {
