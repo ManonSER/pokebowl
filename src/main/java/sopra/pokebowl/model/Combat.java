@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,9 +31,11 @@ public class Combat {
 	private List<Tour> tours = new ArrayList<Tour>();
 	@OneToMany(mappedBy = "combat")
 	private List<PokemonMatch> pokemonMatchs = new ArrayList<PokemonMatch>();
-	@Column(name = "equipe1")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "equipe1")
 	private Equipe equipe1;
-	@Column(name = "equipe2")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "equipe2")
 	private Equipe equipe2;
 	
 	

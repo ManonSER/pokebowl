@@ -42,7 +42,7 @@ public class PokemonMatch {
 	@Column(name = "ppAttaque4")
 	private int ppAttaque4;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private MonPokemon monPokemon;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "combat_id")
