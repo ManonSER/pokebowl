@@ -2,14 +2,36 @@ package sopra.pokebowl.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="equipe")
 public class Equipe {
 	
+	@Id
+	@Column(name="numero")
 	private Integer numero;
+	
+	@Column(name="nom")
 	private String nom;
+	@Column(name="favorite")
 	private Boolean favorite;
+	@Column(name="nbr_pokemons")
 	private Integer nbrPokemons;
 	
-	private Utilisateur utilisateur;
+	@ManyToOne
+	@JoinColumn(name="id_utilisateur")
+	private Utilisateur utilisateurEquipeSauv;
+	@OneToOne(mappedBy="derniere_equipe")
+	private Utilisateur utilisateurDeniereEquipe;
+	@OneToMany(mappedBy="equipe")
 	private List<MonPokemon> listPokemons;
 	
 	public Equipe() {
