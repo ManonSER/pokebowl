@@ -1,13 +1,18 @@
 package sopra.pokebowl.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TypeClass")
+@Table(name = "Attaque")
 public class Attaque {
 	@Id
 	@GeneratedValue
@@ -24,7 +29,11 @@ public class Attaque {
 	private Float precision;
 	@Column(name="description", length = 255)
 	private String description;
-	
+	@ManyToMany(mappedBy = "attaques")
+	private List<Pokemon> pokemons;
+	@OneToOne
+	@JoinColumn(name = "type")
+	private TypeClass type;
 	
 	
 	public Attaque() {
@@ -128,6 +137,30 @@ public class Attaque {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+
+	public List<Pokemon> getPokemons() {
+		return pokemons;
+	}
+
+
+
+	public void setPokemons(List<Pokemon> pokemons) {
+		this.pokemons = pokemons;
+	}
+
+
+
+	public TypeClass getType() {
+		return type;
+	}
+
+
+
+	public void setType(TypeClass type) {
+		this.type = type;
 	}
 	
 	
