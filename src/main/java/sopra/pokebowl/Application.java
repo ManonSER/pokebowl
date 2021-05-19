@@ -53,6 +53,14 @@ public class Application {
 	public IPokemonRepository getPokemonRepo() {
 		return pokemonRepo;
 	}
+
+	public IAttaqueRepository getAttaqueRepo() {
+		return attaqueRepo;
+	}
+
+	public ITypeClassRepository getTypeClassRepo() {
+		return typeClassRepo;
+	}
 	
 	
 
