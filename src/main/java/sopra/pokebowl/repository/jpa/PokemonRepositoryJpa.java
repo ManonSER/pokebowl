@@ -173,5 +173,39 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 		}
 		return pokemons;
 	}
+	
+	public List<Pokemon> findAllPokemonByString(String recherche) {
+		List<Pokemon> pokemons = new ArrayList<Pokemon>();
+
+		EntityManager em = null;
+		EntityTransaction tx = null;
+
+		try {
+			em = Application.getInstance().getEmf().createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+
+			TypedQuery<Pokemon> query = em.createQuery(
+					"select p from Pokemon p WHERE p.nom LIKE CONCAT(:recherche,'%')",
+					Pokemon.class);
+
+			query.setParameter("recherche", recherche);
+
+			pokemons = query.getResultList();
+
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		return pokemons;
+	}
 
 }
