@@ -32,7 +32,7 @@ public class CombatRepositoryJpa implements ICombatRepository{
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null && tx.isActive()) {
+			if (tx != null && tx.isActive()) {  
 				tx.rollback();
 			}
 

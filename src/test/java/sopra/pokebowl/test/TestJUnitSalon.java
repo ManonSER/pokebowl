@@ -20,14 +20,14 @@ public class TestJUnitSalon {
 		 
 		Utilisateur joueur1 = new Utilisateur(); 
 		Utilisateur joueur2 = new Utilisateur();
-		joueur1 = utilisateurRepo.save(joueur1);
-		joueur2 = utilisateurRepo.save(joueur2);  
+		joueur1 = utilisateurRepo.save(joueur1); 
+		joueur2 = utilisateurRepo.save(joueur2);    
 		
 		Salon salon = new Salon();
 		salon.setNom("salon des bg");
 		salon.setMotDePasse("32785654");
 		salon.setJoueur1(joueur1);
-		salon.setJoueur2(joueur2); 
+		salon.setJoueur2(joueur2);   
 		
 		salon = salonRepo.save(salon);
 		
