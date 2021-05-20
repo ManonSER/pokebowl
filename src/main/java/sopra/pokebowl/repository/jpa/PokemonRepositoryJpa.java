@@ -122,8 +122,7 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			
 			pokemons = query.getResultList();
 	
-	public List<Pokemon> findAllPokemonByType(TypeEnum type1, TypeEnum type2) {
-		List<Pokemon> pokemons = new ArrayList<Pokemon>();
+
 
 			tx.commit();
 		} catch(Exception e) {
@@ -139,6 +138,9 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 		
 		return pokemons;	
 	}
+	
+	public List<Pokemon> findAllPokemonByType(TypeEnum type1, TypeEnum type2) {
+		List<Pokemon> pokemons = new ArrayList<Pokemon>();
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
