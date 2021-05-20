@@ -4,21 +4,27 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import sopra.pokebowl.repository.IAttaqueRepository;
+import sopra.pokebowl.repository.ICombatRepository;
 import sopra.pokebowl.repository.IPokemonRepository;
 import sopra.pokebowl.repository.ITypeClassRepository;
 import sopra.pokebowl.repository.jpa.AttaqueRepositoryJpa;
+import sopra.pokebowl.repository.jpa.CombatRepositoryJpa;
 import sopra.pokebowl.repository.jpa.PokemonRepositoryJpa;
 import sopra.pokebowl.repository.jpa.TypeClassRepositoryJpa;
 
 import sopra.pokebowl.repository.ISalonRepository;
+import sopra.pokebowl.repository.ITourRepository;
 import sopra.pokebowl.repository.IUtilisateurRepository;
 import sopra.pokebowl.repository.jpa.SalonRepositoryJpa;
+import sopra.pokebowl.repository.jpa.TourRepositoryJpa;
 import sopra.pokebowl.repository.jpa.UtilisateurRepositoryJpa;
 
 import sopra.pokebowl.repository.IEquipeRepository;
 import sopra.pokebowl.repository.IMonPokemonRepository;
+import sopra.pokebowl.repository.IPokemonMatchRepository;
 import sopra.pokebowl.repository.jpa.EquipeRepositoryJpa;
 import sopra.pokebowl.repository.jpa.MonPokemonRepositoryJpa;
+import sopra.pokebowl.repository.jpa.PokemonMatchRepositoryJpa;
 
 public class Application {
 	private static Application instance = null;
