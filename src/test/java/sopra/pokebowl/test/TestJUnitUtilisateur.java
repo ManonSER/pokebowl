@@ -18,7 +18,7 @@ public class TestJUnitUtilisateur {
 	public void utilisateurCreate() {
 		IUtilisateurRepository utilisateurRepo = Application.getInstance().getUtilisateurRepo();
 		IEquipeRepository equipeRepo = Application.getInstance().getEquipeRepo();
-		
+		 
 		Statistique stats = new Statistique();
 		stats.setPokemonPrefere("Carapuce");
 		stats.setNbrVictoires(54);
@@ -41,10 +41,10 @@ public class TestJUnitUtilisateur {
 		utilisateur.setStatistique(stats); 
 		utilisateur.setDerniereEquipe(derniereEquipe);
 		
-		utilisateur = utilisateurRepo.save(utilisateur);
+		utilisateur = utilisateurRepo.save(utilisateur); 
 		
 		Utilisateur utilisateurFind = utilisateurRepo.findById(utilisateur.getId());
-		
+		 
 		Assert.assertEquals("pokemonator", utilisateurFind.getPseudo());
 		Assert.assertEquals("jean.jojo@gmail.com", utilisateurFind.getEmail());
 		Assert.assertEquals("chemin/avatar", utilisateurFind.getAvatar());
@@ -107,9 +107,11 @@ public class TestJUnitUtilisateur {
 		Assert.assertEquals(4, utilisateurs.size());
 		
 		utilisateurRepo.delete(utilisateur1);
-		utilisateurRepo.delete(utilisateur2);
-		utilisateurRepo.delete(utilisateur3);
+		utilisateurRepo.delete(utilisateur2);  
+		utilisateurRepo.delete(utilisateur3); 
 		utilisateurRepo.delete(utilisateur4);
+		
+		utilisateurs = utilisateurRepo.findAll();
 		
 		Assert.assertEquals(0, utilisateurs.size());
 	}
