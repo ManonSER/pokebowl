@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import sopra.pokebowl.Application;
 import sopra.pokebowl.model.Pokemon;
+import sopra.pokebowl.model.TypeEnum;
 import sopra.pokebowl.repository.IPokemonRepository;
 
 public class PokemonRepositoryJpa implements IPokemonRepository{
@@ -120,6 +121,9 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			query.setParameter("id", idUtilisateur);
 			
 			pokemons = query.getResultList();
+	
+	public List<Pokemon> findAllPokemonByType(TypeEnum type1, TypeEnum type2) {
+		List<Pokemon> pokemons = new ArrayList<Pokemon>();
 
 			tx.commit();
 		} catch(Exception e) {
@@ -134,6 +138,38 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 		}
 		
 		return pokemons;	
+	}
+
+		EntityManager em = null;
+		EntityTransaction tx = null;
+
+		try {
+			em = Application.getInstance().getEmf().createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+
+			TypedQuery<Pokemon> query = em.createQuery(
+					"select * from Pokemon p WHERE p.type1 = :type1 AND p.type2 = :type2",
+					Pokemon.class);
+
+			query.setParameter("type1", type1);
+			query.setParameter("type2", type2);
+
+			pokemons = query.getResultList();
+
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		return pokemons;
 	}
 
 }
