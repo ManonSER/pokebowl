@@ -27,7 +27,7 @@ public class TestJUnitUtilisateur {
 		
 		Equipe derniereEquipe = new Equipe();
 		derniereEquipe.setNumero(0);
-		derniereEquipe.setNom("dernière équipe");  
+		derniereEquipe.setNom("dernière équipe");    
 		derniereEquipe.setFavorite(false);
 		derniereEquipe.setNbrPokemons(5); 
 	

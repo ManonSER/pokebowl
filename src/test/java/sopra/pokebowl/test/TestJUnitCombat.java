@@ -64,7 +64,7 @@ public class TestJUnitCombat {
 		
 		equipeRepo.delete(equipeJoueur1);
 		equipeRepo.delete(equipeJoueur2);
-	
+	  
 	}
 	
 	@Test
