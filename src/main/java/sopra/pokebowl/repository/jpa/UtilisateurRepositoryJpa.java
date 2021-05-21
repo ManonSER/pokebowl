@@ -28,7 +28,7 @@ public class UtilisateurRepositoryJpa  implements IUtilisateurRepository {
 			TypedQuery<Utilisateur> query = em.createQuery("select u from Utilisateur u", Utilisateur.class);
 			utilisateurs = query.getResultList();
 			
-			tx.commit();
+			tx.commit(); 
 		} catch (Exception e) {
 			e.printStackTrace();
 			if(tx != null && tx.isActive()) {
@@ -170,4 +170,5 @@ public class UtilisateurRepositoryJpa  implements IUtilisateurRepository {
 		return resultat;
 	}
 
+	
 }

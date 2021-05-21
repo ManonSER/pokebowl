@@ -62,11 +62,11 @@ public class Application {
 		return emf;
 	}
 	
-	public IMonPokemonRepository getMonPokemonRepositoryJpa() {
+	public IMonPokemonRepository getMonPokemonRepo() {
 		return monPokeRepo;
 	}
 	
-	public IEquipeRepository getEquipeRepositoryJpa() {
+	public IEquipeRepository getEquipeRepo() {
 		return equipeRepo;
 	}
 
@@ -89,8 +89,6 @@ public class Application {
 		return typeClassRepo;
 	}
 	
-	
-
 	public ICombatRepository getCombatRepo() {
 		return combatRepo;
 	}
@@ -102,12 +100,4 @@ public class Application {
 	public IPokemonMatchRepository getPokemonMatchRepo() {
 		return pokemonMatchRepo;
 	}
-
-	public static void setInstance(Application instance) {
-		Application.instance = instance;
-	}
-	
-	
-	
-
 }

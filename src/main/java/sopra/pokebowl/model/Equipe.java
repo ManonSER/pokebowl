@@ -116,6 +116,17 @@ public class Equipe {
 	public void setListPokemons(List<MonPokemon> listPokemons) {
 		this.listPokemons = listPokemons;
 	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	
 	
 	

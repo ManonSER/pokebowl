@@ -8,4 +8,5 @@ import sopra.pokebowl.model.Pokemon;
 public interface IPokemonRepository extends IRepository<Pokemon, Long> {
 	public List<Attaque> findAllAttaquesPokemonById(Long id);
 
+	public List<Pokemon> findAllPokemonByString(String recherche);
 }

@@ -14,7 +14,7 @@ import sopra.pokebowl.repository.ICombatRepository;
 public class CombatRepositoryJpa implements ICombatRepository{
 
 	@Override
-	public List<Combat> findAll() {
+	public List<Combat> findAll() {  
 		List<Combat> combats = new ArrayList<Combat>();
 
 		EntityManager em = null;
@@ -25,14 +25,14 @@ public class CombatRepositoryJpa implements ICombatRepository{
 			tx = em.getTransaction();
 			tx.begin();
 
-			TypedQuery<Combat> query = em.createQuery("select e from Evaluation e", Combat.class);
+			TypedQuery<Combat> query = em.createQuery("select c from Combat c", Combat.class);
 
 			combats = query.getResultList();
 
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
-			if (tx != null && tx.isActive()) {
+			if (tx != null && tx.isActive()) {  
 				tx.rollback();
 			}
 
