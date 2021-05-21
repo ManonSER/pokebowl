@@ -122,11 +122,6 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			query.setParameter("id", idUtilisateur);
 			
 			pokemons = query.getResultList();
-	
-	
-	@Override
-	public List<Attaque> findAllAttaquesPokemonById(Long id) {
-		List<Attaque> attaques = null;
 
 
 			tx.commit();
@@ -212,6 +207,10 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 		}
 		return pokemons;
 	}
+	
+	@Override
+	public List<Attaque> findAllAttaquesPokemonById(Long id) {
+		List<Attaque> attaques = null;
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
