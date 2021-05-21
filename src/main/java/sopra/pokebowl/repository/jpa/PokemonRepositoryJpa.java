@@ -8,6 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import sopra.pokebowl.Application;
+import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.Pokemon;
 import sopra.pokebowl.model.TypeEnum;
 import sopra.pokebowl.repository.IPokemonRepository;
@@ -122,6 +123,10 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			
 			pokemons = query.getResultList();
 	
+	
+	@Override
+	public List<Attaque> findAllAttaquesPokemonById(Long id) {
+		List<Attaque> attaques = null;
 
 
 			tx.commit();
@@ -206,6 +211,36 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			}
 		}
 		return pokemons;
+	}
+
+		EntityManager em = null;
+		EntityTransaction tx = null;
+
+		try {
+			em = Application.getInstance().getEmf().createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+
+			TypedQuery<Attaque> query = em.createQuery(
+					"select p.attaques from Pokemon p where p.id = :idutil",
+					Attaque.class);
+			query.setParameter("idutil", id);
+
+			attaques = query.getResultList();
+
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		return attaques;
 	}
 
 }
