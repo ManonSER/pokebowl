@@ -6,6 +6,7 @@ public class TestJUnitGlobal {
 
 	@Test
 	public void globalTest() {
+		
 		TestJUnitSalon testSalon = new TestJUnitSalon();
 		TestJUnitUtilisateur testUtilisateur = new TestJUnitUtilisateur();
 		TestJUnitCombat testCombat = new TestJUnitCombat();  
@@ -14,22 +15,23 @@ public class TestJUnitGlobal {
 		
 		testSalon.salonCreate(); 
 		testSalon.salonUpdate(); 
-		testSalon.salonFindAllAndDelete();
+		testSalon.salonFindAllAndDelete(); 
 		
-		testUtilisateur.utilisateurCreate(); 
-		testUtilisateur.utilisateurUpdate();
-		testUtilisateur.utilisateurFindAllAndDelete();  
+		testTour.tourCreate();
+		testTour.tourUpdate();
+		testTour.tourFindAllAndDelete();  
+		
+		testPokemonMatch.pokemonMatchCreate();
+		testPokemonMatch.pokemonMatchUpdate();
+		testPokemonMatch.pokemonMatchFindAllAndDelete();  
 		
 		testCombat.combatCreate();
 		testCombat.combatUpdate();
 		testCombat.combatFindAllAndDelete(); 
 		
-		testTour.tourCreate();
-		testTour.tourUpdate();
-		testTour.tourFindAllAndDelete(); 
+		testUtilisateur.utilisateurCreate(); 
+		testUtilisateur.utilisateurUpdate();
+		testUtilisateur.utilisateurFindAllAndDelete();    
 		
-		testPokemonMatch.pokemonMatchCreate();
-		testPokemonMatch.pokemonMatchUpdate();
-		testPokemonMatch.pokemonMatchFindAllAndDelete();
 	} 
 }

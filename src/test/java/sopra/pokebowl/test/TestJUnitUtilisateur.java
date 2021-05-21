@@ -26,7 +26,6 @@ public class TestJUnitUtilisateur {
 		stats.setNbrPartiesJouees(stats.getNbrDefaites() + stats.getNbrVictoires());
 		
 		Equipe derniereEquipe = new Equipe();
-		derniereEquipe.setNumero(0);
 		derniereEquipe.setNom("dernière équipe");    
 		derniereEquipe.setFavorite(false);
 		derniereEquipe.setNbrPokemons(5); 
@@ -35,7 +34,7 @@ public class TestJUnitUtilisateur {
 		 
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setPseudo("pokemonator");
-		utilisateur.setEmail("jean.jojo@gmail.com");
+		utilisateur.setEmail("jean.jojo@gmail.com"); 
 		utilisateur.setAvatar("chemin/avatar");
 		utilisateur.setMotDePasse("lesoleilbrille33");
 		utilisateur.setStatistique(stats); 
@@ -53,7 +52,7 @@ public class TestJUnitUtilisateur {
 		Assert.assertEquals((Integer)54, utilisateurFind.getStatistique().getNbrVictoires());
 		Assert.assertEquals((Integer)34, utilisateurFind.getStatistique().getNbrDefaites());
 		Assert.assertEquals(stats.getNbrPartiesJouees(), utilisateurFind.getStatistique().getNbrPartiesJouees());
-		Assert.assertEquals(derniereEquipe.getNumero(), utilisateurFind.getDerniereEquipe().getNumero());
+		Assert.assertEquals(derniereEquipe.getId(), utilisateurFind.getDerniereEquipe().getId());
 		
 		utilisateurRepo.delete(utilisateur);
 		equipeRepo.delete(derniereEquipe);
