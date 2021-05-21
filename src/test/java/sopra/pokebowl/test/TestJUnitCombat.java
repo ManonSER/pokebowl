@@ -28,7 +28,7 @@ public class TestJUnitCombat {
 		Utilisateur joueur2 = new Utilisateur();
 		joueur1 = utilisateurRepo.save(joueur1);
 		joueur2 = utilisateurRepo.save(joueur2);
-		
+		 
 		Salon salon = new Salon();
 		salon.setJoueur1(joueur1);
 		salon.setJoueur2(joueur2);
@@ -36,9 +36,7 @@ public class TestJUnitCombat {
 		
 		Equipe equipeJoueur1 = new Equipe();
 		Equipe equipeJoueur2 = new Equipe();
-		equipeJoueur1.setNumero(1);
-		equipeJoueur2.setNumero(2);
-		equipeJoueur1 = equipeRepo.save(equipeJoueur1);
+		equipeJoueur1 = equipeRepo.save(equipeJoueur1);  
 		equipeJoueur2 = equipeRepo.save(equipeJoueur2);
 		
 		Combat combat = new Combat(); 
@@ -52,8 +50,8 @@ public class TestJUnitCombat {
 		Combat combatFind = combatRepo.save(combat);
 		
 		Assert.assertEquals(salon.getId(), combatFind.getSalon().getId());
-		Assert.assertEquals(equipeJoueur1.getNumero(), combatFind.getEquipe1().getNumero());
-		Assert.assertEquals(equipeJoueur2.getNumero(), combatFind.getEquipe2().getNumero());
+		Assert.assertEquals(equipeJoueur1.getId(), combatFind.getEquipe1().getId());
+		Assert.assertEquals(equipeJoueur2.getId(), combatFind.getEquipe2().getId());
 		Assert.assertEquals(salon.getJoueur1().getId(), combatFind.getIdUtilisateurGagnant());
 		
 		combatRepo.delete(combat);
