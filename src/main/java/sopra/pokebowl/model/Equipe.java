@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,9 +17,11 @@ import javax.persistence.Table;
 public class Equipe {
 	
 	@Id
+	@GeneratedValue
+	private Long id;
+	
 	@Column(name="numero")
 	private Integer numero;
-	
 	@Column(name="nom")
 	private String nom;
 	@Column(name="favorite")
