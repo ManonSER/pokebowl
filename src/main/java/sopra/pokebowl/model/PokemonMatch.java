@@ -11,12 +11,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pokemonMatch")
+@Table(name = "pokemon_match")
 public class PokemonMatch {
 	
 	@Id
 	@GeneratedValue
-	private int numero;
+	private Integer numero;
 	@Column(name = "hpMatch")
 	private int hpMatch;
 	@Column(name = "acttackMatch")
