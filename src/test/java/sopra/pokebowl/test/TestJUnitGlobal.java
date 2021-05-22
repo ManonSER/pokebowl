@@ -12,6 +12,8 @@ public class TestJUnitGlobal {
 		TestJUnitCombat testCombat = new TestJUnitCombat();  
 		TestJUnitTour testTour = new TestJUnitTour();
 		TestJUnitPokemonMatch testPokemonMatch = new TestJUnitPokemonMatch();
+		TestJUnitEquipe testEquipe = new TestJUnitEquipe();
+		TestJUnitMonPokemon testMonPokemon = new TestJUnitMonPokemon();
 		
 		testSalon.salonCreate(); 
 		testSalon.salonUpdate(); 
@@ -32,6 +34,17 @@ public class TestJUnitGlobal {
 		testUtilisateur.utilisateurCreate(); 
 		testUtilisateur.utilisateurUpdate();
 		testUtilisateur.utilisateurFindAllAndDelete();    
+		
+		testEquipe.equipeCreate();
+		testEquipe.equipeUpdate();
+		testEquipe.equipeFindById();
+		testEquipe.equipeFindAllAndDelete();
+		
+		testMonPokemon.monPokeCreate();
+		testMonPokemon.monPokeUpdate();
+		testMonPokemon.monPokeFindById();
+		testMonPokemon.monPokeFindAllAndDelete();
+		
 		
 	} 
 }

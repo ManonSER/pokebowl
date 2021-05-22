@@ -46,7 +46,7 @@ public class EquipeRepositoryJpa implements IEquipeRepository {
 	}
 
 	@Override
-	public Equipe findById(Integer id) {
+	public Equipe findById(Long id) {
 		Equipe equipe = null;
 
 		EntityManager em = null;
