@@ -10,11 +10,9 @@ import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.Equipe;
 import sopra.pokebowl.model.MonPokemon;
 import sopra.pokebowl.model.Pokemon;
-import sopra.pokebowl.model.PokemonMatch;
 import sopra.pokebowl.repository.IAttaqueRepository;
 import sopra.pokebowl.repository.IEquipeRepository;
 import sopra.pokebowl.repository.IMonPokemonRepository;
-import sopra.pokebowl.repository.IPokemonMatchRepository;
 import sopra.pokebowl.repository.IPokemonRepository;
 
 public class TestJUnitMonPokemon {
@@ -65,9 +63,9 @@ public class TestJUnitMonPokemon {
 		IMonPokemonRepository monPokeRepo = Application.getInstance().getMonPokemonRepo();
 		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
 		IPokemonRepository pokeRepo = Application.getInstance().getPokemonRepo();
-		IPokemonMatchRepository pokeMatchRepo = Application.getInstance().getPokemonMatchRepo();
 		
-		MonPokemon p1 = new MonPokemon(1, null, null, null, null, null, null, null);
+		MonPokemon p1 = new MonPokemon();
+		p1.setOrdre(1);
 		
 		Equipe e = new Equipe();
 		e = equipeRepo.save(e);
@@ -91,10 +89,6 @@ public class TestJUnitMonPokemon {
 		p = pokeRepo.save(p);
 		p1.setPokeReference(p);
 		
-		PokemonMatch pm = new PokemonMatch();
-		pm = pokeMatchRepo.save(pm);
-		p1.setPokeMatch(pm);
-		
 		p1 = monPokeRepo.save(p1);
 	
 		Assert.assertEquals((Integer)1, p1.getOrdre());
@@ -104,10 +98,8 @@ public class TestJUnitMonPokemon {
 		Assert.assertEquals(a3.getId(), p1.getAttaque3().getId());
 		Assert.assertEquals(a4.getId(), p1.getAttaque4().getId());
 		Assert.assertEquals(p.getId(), p1.getPokeReference().getId());
-		Assert.assertEquals(pm.getNumero(), p1.getPokeMatch().getNumero());
 		
 		monPokeRepo.delete(p1);
-		pokeMatchRepo.delete(pm);
 		pokeRepo.delete(p);
 		attaqueRepo.delete(a4);
 		attaqueRepo.delete(a3);
@@ -127,11 +119,10 @@ public class TestJUnitMonPokemon {
 		p.setOrdre(5);
 		p = monPokeRepo.save(p);
 		
-		MonPokemon pFind = monPokeRepo.save(p);
+		MonPokemon pFind = monPokeRepo.findById(p.getId());
 		
 		Assert.assertEquals((Integer)5, pFind.getOrdre());
-		
+	
 		monPokeRepo.delete(p); 
-		monPokeRepo.delete(pFind);
 	}
 }
