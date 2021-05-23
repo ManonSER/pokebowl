@@ -43,7 +43,7 @@ public class Pokemon {
 	@Column(name="description", length = 255)
 	private String description;
 	@ManyToMany
-	@JoinTable(name = "attaque_pokemon", joinColumns = @JoinColumn(name = "attaque_id"), inverseJoinColumns = @JoinColumn(name = "pokemon_id"))
+	@JoinTable(name = "attaque_pokemon", joinColumns = @JoinColumn(name = "pokemon_id"), inverseJoinColumns = @JoinColumn(name = "attaque_id"))
 	private List<Attaque> attaques;
 	@OneToOne
 	@JoinColumn(name = "type1")
