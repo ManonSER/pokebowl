@@ -1,5 +1,6 @@
 package sopra.pokebowl.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -35,10 +36,10 @@ public class Equipe {
 	@OneToOne(mappedBy="derniereEquipe")
 	private Utilisateur utilisateurDeniereEquipe;
 	@OneToMany(mappedBy="equipe")
-	private List<MonPokemon> listPokemons;
+	private List<MonPokemon> listPokemons = new ArrayList<MonPokemon>();
 	
 	public Equipe() {
-		this(null, null, null, null, null, null, null);
+		super();
 	}
 	
 	
