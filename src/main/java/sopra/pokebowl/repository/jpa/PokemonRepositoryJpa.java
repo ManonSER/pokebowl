@@ -221,9 +221,9 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			tx.begin();
 
 			TypedQuery<Attaque> query = em.createQuery(
-					"select p.attaques from Pokemon p where p.id = :idutil",
+					"select a from Attaque a inner join a.pokemons pa where pa.id = :idpoke",
 					Attaque.class);
-			query.setParameter("idutil", id);
+			query.setParameter("idpoke", id);
 
 			attaques = query.getResultList();
 

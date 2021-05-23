@@ -1,5 +1,6 @@
 package sopra.pokebowl.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -30,7 +31,7 @@ public class Attaque {
 	@Column(name="description", length = 255)
 	private String description;
 	@ManyToMany(mappedBy = "attaques")
-	private List<Pokemon> pokemons;
+	private List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	@OneToOne
 	@JoinColumn(name = "type_attaque")
 	private TypeClass typeAttaque;
