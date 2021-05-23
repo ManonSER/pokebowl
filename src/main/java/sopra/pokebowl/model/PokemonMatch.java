@@ -11,12 +11,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pokemonMatch")
+@Table(name = "pokemon_match")
 public class PokemonMatch {
 	
 	@Id
 	@GeneratedValue
-	private int numero;
+	private Integer numero;
 	@Column(name = "hpMatch")
 	private int hpMatch;
 	@Column(name = "acttackMatch")
@@ -42,7 +42,7 @@ public class PokemonMatch {
 	@Column(name = "ppAttaque4")
 	private int ppAttaque4;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="monPokemon_id")
 	private MonPokemon monPokemon;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -73,11 +73,11 @@ public class PokemonMatch {
 		this.ppAttaque4 = ppAttaque4;
 	}
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
