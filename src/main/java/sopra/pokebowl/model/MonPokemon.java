@@ -20,7 +20,7 @@ public class MonPokemon {
 	private Integer ordre;
 	
 	@ManyToOne
-	@JoinColumn(name="numero_equipe")
+	@JoinColumn(name="id_equipe")
 	private Equipe equipe;
 	@OneToOne
 	@JoinColumn(name="id_pokemon")
@@ -41,7 +41,7 @@ public class MonPokemon {
 	private PokemonMatch pokeMatch;
 	
 	public MonPokemon() {
-		this(null, null, null, null, null, null, null, null);
+		super();
 	}
 	
 	public MonPokemon(Integer ordre, Equipe equipe, Pokemon pokeReference, Attaque attaque1, Attaque attaque2,

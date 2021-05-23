@@ -25,7 +25,7 @@ public class PokemonMatchRepositoryJpa implements IPokemonMatchRepository{
 			tx = em.getTransaction();
 			tx.begin();
 
-			TypedQuery<PokemonMatch> query = em.createQuery("select e from Evaluation e", PokemonMatch.class);
+			TypedQuery<PokemonMatch> query = em.createQuery("select p from PokemonMatch p", PokemonMatch.class);
 
 			pokemonMatchs = query.getResultList();
 
@@ -46,7 +46,7 @@ public class PokemonMatchRepositoryJpa implements IPokemonMatchRepository{
 	}
 
 	@Override
-	public PokemonMatch findById(Long id) {
+	public PokemonMatch findById(Integer id) {
 		PokemonMatch pokemonMatch = null;
 
 		EntityManager em = null;

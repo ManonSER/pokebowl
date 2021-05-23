@@ -2,6 +2,8 @@ package sopra.pokebowl.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,8 +18,10 @@ public class Tour {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Enumerated(EnumType.STRING)
 	@Column(name = "actionJoueur1")
 	private Action actionJoueur1;
+	@Enumerated(EnumType.STRING)
 	@Column(name = "actionJoueur2")
 	private Action actionJoueur2;
 	@Column(name = "attaquePokemon1")

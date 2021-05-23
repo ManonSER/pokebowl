@@ -1,9 +1,11 @@
 package sopra.pokebowl.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,9 +18,11 @@ import javax.persistence.Table;
 public class Equipe {
 	
 	@Id
+	@GeneratedValue
+	private Long id;
+	
 	@Column(name="numero")
 	private Integer numero;
-	
 	@Column(name="nom")
 	private String nom;
 	@Column(name="favorite")
@@ -32,10 +36,10 @@ public class Equipe {
 	@OneToOne(mappedBy="derniereEquipe")
 	private Utilisateur utilisateurDeniereEquipe;
 	@OneToMany(mappedBy="equipe")
-	private List<MonPokemon> listPokemons;
+	private List<MonPokemon> listPokemons = new ArrayList<MonPokemon>();
 	
 	public Equipe() {
-		this(null, null, null, null, null, null, null);
+		super();
 	}
 	
 	
@@ -113,6 +117,17 @@ public class Equipe {
 	public void setListPokemons(List<MonPokemon> listPokemons) {
 		this.listPokemons = listPokemons;
 	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	
 	
 	
