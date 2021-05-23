@@ -24,9 +24,8 @@ public class TypeClass {
 		super();
 	}
 
-	public TypeClass(Long id, TypeEnum type, String avatar) {
+	public TypeClass(TypeEnum type, String avatar) {
 		super();
-		this.id = id;
 		this.type = type;
 		this.avatar = avatar;
 	}
