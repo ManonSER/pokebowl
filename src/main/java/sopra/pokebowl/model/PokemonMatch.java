@@ -42,7 +42,7 @@ public class PokemonMatch {
 	@Column(name = "ppAttaque4")
 	private int ppAttaque4;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="monPokemon_id")
 	private MonPokemon monPokemon;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -73,11 +73,11 @@ public class PokemonMatch {
 		this.ppAttaque4 = ppAttaque4;
 	}
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 

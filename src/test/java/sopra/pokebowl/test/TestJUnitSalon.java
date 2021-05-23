@@ -93,4 +93,32 @@ public class TestJUnitSalon {
 		
 		Assert.assertEquals(0, salons.size());
 	}
+	
+	@Test
+	public void salonFindSalonWithMDP() {
+		ISalonRepository salonRepo = Application.getInstance().getSalonRepo();
+		
+		Salon s1 = new Salon();
+		s1.setNom("salon 1");
+		s1.setMotDePasse("lesoleildusud3344");
+		s1 = salonRepo.save(s1);
+		
+		Salon s2 = new Salon();
+		s2.setNom("salon 2");
+		s2.setMotDePasse("56738273UVGHSGwvxf232");
+		s2 = salonRepo.save(s2);
+		
+		Salon s3 = new Salon();
+		s3.setNom("salon 3");
+		s3.setMotDePasse("15031995turlututu");
+		s3 = salonRepo.save(s3);
+		
+		Salon salonFind = salonRepo.findSalonWithMDP("56738273UVGHSGwvxf232");
+		
+		Assert.assertEquals(s2.getId(), salonFind.getId());
+		
+		salonRepo.delete(s1);
+		salonRepo.delete(s2);
+		salonRepo.delete(s3);
+	}
 }

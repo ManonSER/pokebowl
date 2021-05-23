@@ -75,4 +75,37 @@ public class SalonRepositoryJpa implements ISalonRepository {
 		return salon;
 	}
 
+	@Override
+	public Salon findSalonWithMDP(String mdp) {
+		Salon salon = null;
+		
+		EntityManager em = null;
+		EntityTransaction tx = null;
+
+		try {
+			em = Application.getInstance().getEmf().createEntityManager(); 
+			tx = em.getTransaction();
+			tx.begin();
+			
+			TypedQuery<Salon> query = em.createQuery("select s from Salon s where s.motDePasse = :mdp", Salon.class);
+			
+			query.setParameter("mdp", mdp);
+			
+			salon = query.getSingleResult();
+
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		
+		return salon;
+	}
 }

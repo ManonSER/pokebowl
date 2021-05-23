@@ -7,9 +7,13 @@ import org.junit.Test;
 
 import sopra.pokebowl.Application;
 import sopra.pokebowl.model.Equipe;
+import sopra.pokebowl.model.MonPokemon;
+import sopra.pokebowl.model.Pokemon;
 import sopra.pokebowl.model.Statistique;
 import sopra.pokebowl.model.Utilisateur;
 import sopra.pokebowl.repository.IEquipeRepository;
+import sopra.pokebowl.repository.IMonPokemonRepository;
+import sopra.pokebowl.repository.IPokemonRepository;
 import sopra.pokebowl.repository.IUtilisateurRepository;
 
 public class TestJUnitUtilisateur {
@@ -113,5 +117,50 @@ public class TestJUnitUtilisateur {
 		utilisateurs = utilisateurRepo.findAll();
 		
 		Assert.assertEquals(0, utilisateurs.size());
+	}
+	
+	@Test
+	public void utilisateurFindPseudoMailAvatarStatsById() {
+		IUtilisateurRepository utilisateurRepo = Application.getInstance().getUtilisateurRepo();
+		
+		Statistique stats = new Statistique();
+		stats.setPokemonPrefere("Carapuce");
+		stats.setNbrVictoires(54);
+		stats.setNbrDefaites(34);
+		stats.setNbrPartiesJouees(stats.getNbrDefaites() + stats.getNbrVictoires());
+		
+		Utilisateur u1 = new Utilisateur();
+		u1.setPseudo("tristandu33");
+		u1.setEmail("tristan.poul@hotmail.fr");
+		u1.setAvatar("chemin/dossier/image");
+		u1.setMotDePasse("23456346hbhdbG");
+		u1 = utilisateurRepo.save(u1);
+		
+		Utilisateur u2 = new Utilisateur();
+		u2.setPseudo("pokemonator");
+		u2.setEmail("poke.mon@yahoo.fr");
+		u2.setAvatar("dossier/jeux/avatar");
+		u2.setMotDePasse("lesoleilbrille3344");
+		u2.setStatistique(stats);
+		u2 = utilisateurRepo.save(u2);
+		
+		Utilisateur u3 = new Utilisateur();
+		u3.setPseudo("francisdu92");
+		u3.setEmail("francis.lalane@gmail.com");
+		u3.setAvatar("C/avatars/image");
+		u3.setMotDePasse("troisplusdeux=7");
+		u3 = utilisateurRepo.save(u3);
+		
+		Object[] infoJoueur = utilisateurRepo.findPseudoMailAvatarStatsById(u2.getId()); 
+		Statistique statFind = (Statistique)infoJoueur[3];
+		
+		Assert.assertEquals(u2.getPseudo(), infoJoueur[0]);
+		Assert.assertEquals(u2.getEmail(), infoJoueur[1]);
+		Assert.assertEquals(u2.getAvatar(), infoJoueur[2]);
+		Assert.assertEquals(stats.getPokemonPrefere(), statFind.getPokemonPrefere());
+		
+		utilisateurRepo.delete(u1);
+		utilisateurRepo.delete(u2);
+		utilisateurRepo.delete(u3);  
 	}
 }

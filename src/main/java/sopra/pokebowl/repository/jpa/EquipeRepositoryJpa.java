@@ -8,6 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import sopra.pokebowl.Application;
+import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.Equipe;
 import sopra.pokebowl.repository.IEquipeRepository;
 
@@ -75,4 +76,35 @@ public class EquipeRepositoryJpa implements IEquipeRepository {
 		return equipe;
 	}
 
+	public List<Equipe> findEquipesByUtilisateurId(Long id) {
+		List<Equipe> equipes = new ArrayList<Equipe>();
+		
+		EntityManager em = null;
+		EntityTransaction tx = null;
+
+		try {
+			em = Application.getInstance().getEmf().createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+
+			TypedQuery<Equipe> query = em.createQuery("select u.utilisateurEquipeSauv from Utilisateur u where u.id = :idutil", Equipe.class);
+			query.setParameter("idutil", id);
+
+			equipes = query.getResultList();
+
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		
+		return equipes;
+	}
 }
