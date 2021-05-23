@@ -38,7 +38,7 @@ public class EquipeRepositoryJpa implements IEquipeRepository {
 			}
 
 		} finally {
-			if (em != null) {
+			if (em != null) {  
 				em.close();
 			}
 		}
@@ -87,7 +87,7 @@ public class EquipeRepositoryJpa implements IEquipeRepository {
 			tx = em.getTransaction();
 			tx.begin();
 
-			TypedQuery<Equipe> query = em.createQuery("select u.utilisateurEquipeSauv from Utilisateur u where u.id = :idutil", Equipe.class);
+			TypedQuery<Equipe> query = em.createQuery("select e from Equipe e where e.utilisateurEquipeSauv.id = :idutil", Equipe.class);
 			query.setParameter("idutil", id);
 
 			equipes = query.getResultList();
