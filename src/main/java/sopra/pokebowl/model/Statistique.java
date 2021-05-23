@@ -16,7 +16,7 @@ public class Statistique {
 	private Integer nbrPartiesJouees;
 	
 	public Statistique() {
-		this(null, null, null, null);
+		super();
 	}
 	
 	public Statistique(String pokemonPrefere, Integer nbrVictoires, Integer nbrDefaites,

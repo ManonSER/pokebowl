@@ -17,7 +17,7 @@ public class Attaque {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(name="non")
+	@Column(name="nom")
 	private String nom;
 	@Column(name="categorie")
 	private CategorieAttaque categorie;
@@ -43,10 +43,9 @@ public class Attaque {
 
 
 
-	public Attaque(Long id, String nom, CategorieAttaque categorie, Integer pointDePouvoir, Integer puissance,
+	public Attaque(String nom, CategorieAttaque categorie, Integer pointDePouvoir, Integer puissance,
 			Float precision, String description) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.categorie = categorie;
 		this.pointDePouvoir = pointDePouvoir;

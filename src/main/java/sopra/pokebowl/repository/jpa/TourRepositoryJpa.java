@@ -25,7 +25,7 @@ public class TourRepositoryJpa implements ITourRepository{
 			tx = em.getTransaction();
 			tx.begin();
 
-			TypedQuery<Tour> query = em.createQuery("select e from Evaluation e", Tour.class);
+			TypedQuery<Tour> query = em.createQuery("select t from Tour t", Tour.class);
 
 			tours = query.getResultList();
 

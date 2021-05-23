@@ -43,7 +43,7 @@ public class Pokemon {
 	@Column(name="description", length = 255)
 	private String description;
 	@ManyToMany
-	@JoinTable(name = "attaque_pokemon", joinColumns = @JoinColumn(name = "attaque_id"), inverseJoinColumns = @JoinColumn(name = "pokemon_id"))
+	@JoinTable(name = "attaque_pokemon", joinColumns = @JoinColumn(name = "pokemon_id"), inverseJoinColumns = @JoinColumn(name = "attaque_id"))
 	private List<Attaque> attaques;
 	@OneToOne
 	@JoinColumn(name = "type1")
@@ -58,11 +58,10 @@ public class Pokemon {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pokemon(Long id, String nom, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
+	public Pokemon(String nom, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
 			Integer defenseSpe, Integer speed, Float taille, Float poids, Integer generation, String avatar,
 			String description) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.hp = hp;
 		this.attaque = attaque;

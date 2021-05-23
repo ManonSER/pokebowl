@@ -11,12 +11,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pokemonMatch")
+@Table(name = "pokemon_match")
 public class PokemonMatch {
 	
 	@Id
 	@GeneratedValue
-	private int numero;
+	private Integer numero;
 	@Column(name = "hpMatch")
 	private int hpMatch;
 	@Column(name = "acttackMatch")
@@ -26,7 +26,7 @@ public class PokemonMatch {
 	@Column(name = "specialAttackMatch")
 	private int specialAttackMatch;
 	@Column(name = "defenseActtackMatch")
-	private int defenseAttackMatch;
+	private int specialDefenseMatch;
 	@Column(name = "speedMatch")
 	private int speedMatch;
 	@Column(name = "numAttaqueActive")
@@ -42,7 +42,7 @@ public class PokemonMatch {
 	@Column(name = "ppAttaque4")
 	private int ppAttaque4;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="monPokemon_id")
 	private MonPokemon monPokemon;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -63,7 +63,7 @@ public class PokemonMatch {
 		this.attackMatch = attackMatch;
 		this.defenseMatch = defenseMatch;
 		this.specialAttackMatch = specialAttackMatch;
-		this.defenseAttackMatch = defenseAttackMatch;
+		this.specialDefenseMatch = defenseAttackMatch;
 		this.speedMatch = speedMatch;
 		this.numAttaqueActive = numAttaqueActive;
 		this.statut = statut;
@@ -73,11 +73,11 @@ public class PokemonMatch {
 		this.ppAttaque4 = ppAttaque4;
 	}
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
@@ -113,12 +113,12 @@ public class PokemonMatch {
 		this.specialAttackMatch = specialAttackMatch;
 	}
 
-	public int getDefenseAttackMatch() {
-		return defenseAttackMatch;
+	public int getSpecialDefenseMatch() {
+		return specialDefenseMatch;
 	}
 
-	public void setDefenseAttackMatch(int defenseAttackMatch) {
-		this.defenseAttackMatch = defenseAttackMatch;
+	public void setSpecialDefenseMatch(int defenseAttackMatch) {
+		this.specialDefenseMatch = defenseAttackMatch;
 	}
 
 	public int getSpeedMatch() {

@@ -27,7 +27,7 @@ public interface IRepository<T, PK> {
 		} catch (Exception e) {
 			e.printStackTrace();
 			if (tx != null && tx.isActive()) {
-				tx.rollback();
+				tx.rollback();  
 			}
 
 		} finally {
