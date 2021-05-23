@@ -14,6 +14,7 @@ public class TestJUnitGlobal {
 		TestJUnitPokemonMatch testPokemonMatch = new TestJUnitPokemonMatch();
 		TestJUnitEquipe testEquipe = new TestJUnitEquipe();
 		TestJUnitMonPokemon testMonPokemon = new TestJUnitMonPokemon();
+		TestJUnitTypeClass testTypeClass = new TestJUnitTypeClass();
 		
 		testSalon.salonCreate(); 
 		testSalon.salonUpdate(); 
@@ -48,6 +49,11 @@ public class TestJUnitGlobal {
 		testMonPokemon.monPokeUpdate();
 		testMonPokemon.monPokeFindById();
 		testMonPokemon.monPokeFindAllAndDelete();
+		
+		testTypeClass.typeClassCreate();
+		testTypeClass.typeClassUpdate();
+		testTypeClass.typeClassFindById();
+		testTypeClass.typeClassFindAllAndDelete();
 		
 		
 	} 
