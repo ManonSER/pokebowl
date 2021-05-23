@@ -20,7 +20,7 @@ public class MonPokemon {
 	private Integer ordre;
 	
 	@ManyToOne
-	@JoinColumn(name="numero_equipe")
+	@JoinColumn(name="id_equipe")
 	private Equipe equipe;
 	@OneToOne
 	@JoinColumn(name="id_pokemon")

@@ -125,28 +125,24 @@ public class UtilisateurRepositoryJpa  implements IUtilisateurRepository {
 			tx2.begin();
 
 			TypedQuery<Equipe> query = em.createQuery(
-					"select u.equipesSauvegardees from Utilisateur u where u.id = :idutil",
+					"select e from Equipe e where e.utilisateurEquipeSauv.id = :idutil",
 					Equipe.class);
 
 			query.setParameter("idutil", id);
 
 			equipes = query.getResultList();
 			
-			
 			for(Equipe e : equipes) {
 				List<String> avatarsEquipe = new ArrayList<String>();
 				for(int j=0; j<e.getNbrPokemons(); j++) {
 					TypedQuery<String> q2 = em2.createQuery(
-							"select eq.listPokemons[:jutil].pokeReference.avatar from Equipe eq where (eq.utilisateurEquipeSauv.id = :idutil and eq.numero = :num)",
+							"select p.pokeReference.avatar from MonPokemon p where p.id = :idpoke",
 							String.class);
-					q2.setParameter("jutil", j);
-					q2.setParameter("idutil", id);
-					q2.setParameter("num", e.getNumero());
+					q2.setParameter("idpoke", e.getListPokemons().get(j).getId());
 					String av = q2.getSingleResult();
 					avatarsEquipe.add(av);	
 				}
-				resultat.add(avatarsEquipe);
-				//avatarsEquipe.clear();				
+				resultat.add(avatarsEquipe);			
 			}
 			tx2.commit();
 			tx.commit();
@@ -169,6 +165,5 @@ public class UtilisateurRepositoryJpa  implements IUtilisateurRepository {
 		}
 		return resultat;
 	}
-
 	
 }
