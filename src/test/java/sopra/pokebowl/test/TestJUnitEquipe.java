@@ -137,4 +137,56 @@ public class TestJUnitEquipe {
 		equipeRepo.delete(e); 
 	}
 
+	@Test
+	public void equipeFindEquipeByUtilisateurId() {
+		IEquipeRepository equipeRepo = Application.getInstance().getEquipeRepo();
+		IUtilisateurRepository utilRepo = Application.getInstance().getUtilisateurRepo();
+		
+		Equipe e1 = new Equipe();
+		Equipe e2 = new Equipe();
+		Equipe e3 = new Equipe();
+		Equipe e4 = new Equipe();
+		Equipe e5 = new Equipe();
+		Equipe e6 = new Equipe();
+		
+		Utilisateur u1 = new Utilisateur();
+		u1 = utilRepo.save(u1);
+		
+		Utilisateur u2 = new Utilisateur();
+		u2 = utilRepo.save(u2);
+		
+		Utilisateur u3 = new Utilisateur();
+		u3 = utilRepo.save(u3);
+		
+		e1.setUtilisateurEquipeSauv(u1);
+		e2.setUtilisateurEquipeSauv(u1);
+		e3.setUtilisateurEquipeSauv(u1);
+		e4.setUtilisateurEquipeSauv(u1);
+		e5.setUtilisateurEquipeSauv(u2);
+		e6.setUtilisateurEquipeSauv(u2);
+		
+		e1 = equipeRepo.save(e1);
+		e2 = equipeRepo.save(e2);
+		e3 = equipeRepo.save(e3);
+		e4 = equipeRepo.save(e4);
+		e5 = equipeRepo.save(e5);
+		e6 = equipeRepo.save(e6);
+		
+		List<Equipe> equipeU1 = equipeRepo.findEquipesByUtilisateurId(u1.getId());
+		
+		Assert.assertEquals(4, equipeU1.size());
+		
+		equipeRepo.delete(e1);
+		equipeRepo.delete(e2);
+		equipeRepo.delete(e3);
+		equipeRepo.delete(e4);
+		equipeRepo.delete(e5);
+		equipeRepo.delete(e6);
+		
+		utilRepo.delete(u1);
+		utilRepo.delete(u2);
+		utilRepo.delete(u3);
+		
+		
+	}
 }

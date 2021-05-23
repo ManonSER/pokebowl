@@ -18,9 +18,10 @@ public class TestJUnitGlobal {
 		testSalon.salonCreate(); 
 		testSalon.salonUpdate(); 
 		testSalon.salonFindAllAndDelete(); 
+		testSalon.salonFindSalonWithMDP();
 		
 		testTour.tourCreate();
-		testTour.tourUpdate();
+		testTour.tourUpdate();  
 		testTour.tourFindAllAndDelete();  
 		
 		testPokemonMatch.pokemonMatchCreate();
@@ -40,7 +41,8 @@ public class TestJUnitGlobal {
 		testEquipe.equipeCreate();
 		testEquipe.equipeUpdate();
 		testEquipe.equipeFindById();
-		testEquipe.equipeFindAllAndDelete();
+		testEquipe.equipeFindAllAndDelete();  
+		testEquipe.equipeFindEquipeByUtilisateurId();
 		
 		testMonPokemon.monPokeCreate();
 		testMonPokemon.monPokeUpdate();

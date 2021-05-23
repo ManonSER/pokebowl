@@ -144,7 +144,7 @@ public class TestJUnitUtilisateur {
 			System.out.println(o.toString());
 		}
 		
-		Assert.assertEquals((String)result[0], u.getPseudo());
+		Assert.assertEquals((String)result[0], u.getPseudo());  
 		Assert.assertEquals((String)result[1], u.getEmail());
 		Assert.assertEquals((String)result[2], u.getAvatar());
 		Assert.assertEquals(((Statistique)result[3]).getPokemonPrefere(), u.getStatistique().getPokemonPrefere());
@@ -351,8 +351,6 @@ public class TestJUnitUtilisateur {
 		pokeRepo.delete(pp3);
 		pokeRepo.delete(pp2);
 		pokeRepo.delete(pp1);
-		
-		
-		
+ 
 	}
 }
