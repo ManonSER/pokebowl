@@ -49,6 +49,7 @@ public class TestJUnitAttaque {
 	public void attaqueCreate() {
 		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
 		ITypeClassRepository typeClassRepo = Application.getInstance().getTypeClassRepo();
+		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
 		
 		String nom = "Charge";
 		CategorieAttaque categorie = CategorieAttaque.PHYSIQUE;
@@ -67,9 +68,13 @@ public class TestJUnitAttaque {
 		Pokemon p4 = new Pokemon();
 		
 		pokemons.add(p1);
+		p1 = pokemonRepo.save(p1);
 		pokemons.add(p2);
+		p2 = pokemonRepo.save(p2);
 		pokemons.add(p3);
+		p3 = pokemonRepo.save(p3);
 		pokemons.add(p4);
+		p4 = pokemonRepo.save(p4);
 		
 		a1.setPokemons(pokemons);
 		
@@ -93,7 +98,12 @@ public class TestJUnitAttaque {
 		Assert.assertEquals(TypeEnum.NORMAL, a1.getTypeAttaque().getType());
 		
 		attaqueRepo.delete(a1);
+		pokemonRepo.delete(p4);
+		pokemonRepo.delete(p3);
+		pokemonRepo.delete(p2);
+		pokemonRepo.delete(p1);
 		typeClassRepo.delete(type1);
+		
 	}
 	
 	@Test

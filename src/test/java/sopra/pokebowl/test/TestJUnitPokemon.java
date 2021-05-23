@@ -11,6 +11,7 @@ import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.Pokemon;
 import sopra.pokebowl.model.TypeClass;
 import sopra.pokebowl.model.TypeEnum;
+import sopra.pokebowl.repository.IAttaqueRepository;
 import sopra.pokebowl.repository.IPokemonRepository;
 import sopra.pokebowl.repository.ITypeClassRepository;
 
@@ -42,6 +43,7 @@ public class TestJUnitPokemon {
 	public void pokemonCreate() {
 		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
 		ITypeClassRepository typeClassRepo = Application.getInstance().getTypeClassRepo();
+		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
 		
 		String nom = "Bulbizarre";
 		Integer hp = 200;
@@ -61,9 +63,13 @@ public class TestJUnitPokemon {
 		List<Attaque> attaques = new ArrayList<Attaque>();
 		
 		Attaque a1 = new Attaque();
+		a1 = attaqueRepo.save(a1);
 		Attaque a2 = new Attaque();
+		a2 = attaqueRepo.save(a2);
 		Attaque a3 = new Attaque();
+		a3 = attaqueRepo.save(a3);
 		Attaque a4 = new Attaque();
+		a4 = attaqueRepo.save(a4);
 		
 		attaques.add(a1);
 		attaques.add(a2);
@@ -102,6 +108,10 @@ public class TestJUnitPokemon {
 		Assert.assertEquals(TypeEnum.POISON, p1.getType2().getType());
 		
 		pokemonRepo.delete(p1);
+		attaqueRepo.delete(a4);
+		attaqueRepo.delete(a3);
+		attaqueRepo.delete(a2);
+		attaqueRepo.delete(a1);
 		typeClassRepo.delete(type1);
 		typeClassRepo.delete(type2);
 	}
