@@ -3,11 +3,17 @@ package sopra.pokebowl.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 import sopra.pokebowl.Application;
 import sopra.pokebowl.model.Attaque;
+import sopra.pokebowl.model.CategorieAttaque;
 import sopra.pokebowl.model.Pokemon;
 import sopra.pokebowl.model.TypeClass;
 import sopra.pokebowl.model.TypeEnum;
@@ -17,7 +23,7 @@ import sopra.pokebowl.repository.ITypeClassRepository;
 
 public class TestJUnitAttaque {
 	@Test
-	public void pokemonFindAllAndDelete() {
+	public void attaqueFindAllAndDelete() {
 		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
 		
 		Attaque a1 = new Attaque();
@@ -40,100 +46,88 @@ public class TestJUnitAttaque {
 	}
 	
 	@Test
-	public void pokemonCreate() {
-		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
+	public void attaqueCreate() {
+		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
 		ITypeClassRepository typeClassRepo = Application.getInstance().getTypeClassRepo();
+		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
 		
-		String nom = "Bulbizarre";
-		Integer hp = 200;
-		Integer attaque = 92;
-		Integer defense = 92;
-		Integer attaqueSpe = 121;
-		Integer defenseSpe = 121;
-		Integer speed = 85;
-		Float taille = 0.7f;
-		Float poids = 6.9f;
-		Integer generation = 1;
-		String avatar = null;
-		String description = "A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.";
+		String nom = "Charge";
+		CategorieAttaque categorie = CategorieAttaque.PHYSIQUE;
+		Integer pointDePouvoir = 35;
+		Integer puissance = 40;
+		Float precisionAttaque = 100f;
+		String description = "Le lanceur charge l'ennemi et le percute de tout son poids.";
+			
+		Attaque a1 = new Attaque(nom, categorie, pointDePouvoir, puissance, precisionAttaque, description);
 		
-		Pokemon p1 = new Pokemon(nom, hp, attaque, defense, attaqueSpe, defenseSpe, speed, taille, poids, generation, avatar, description);
+		List<Pokemon> pokemons = new ArrayList<Pokemon>();
 		
-		List<Attaque> attaques = new ArrayList<Attaque>();
+		Pokemon p1 = new Pokemon();
+		Pokemon p2 = new Pokemon();
+		Pokemon p3 = new Pokemon();
+		Pokemon p4 = new Pokemon();
 		
-		Attaque a1 = new Attaque();
-		Attaque a2 = new Attaque();
-		Attaque a3 = new Attaque();
-		Attaque a4 = new Attaque();
+		pokemons.add(p1);
+		p1 = pokemonRepo.save(p1);
+		pokemons.add(p2);
+		p2 = pokemonRepo.save(p2);
+		pokemons.add(p3);
+		p3 = pokemonRepo.save(p3);
+		pokemons.add(p4);
+		p4 = pokemonRepo.save(p4);
 		
-		attaques.add(a1);
-		attaques.add(a2);
-		attaques.add(a3);
-		attaques.add(a4);
+		a1.setPokemons(pokemons);
 		
-		p1.setAttaques(attaques);
-		
-		TypeClass type1 = new TypeClass(TypeEnum.PLANTE, null);
-		TypeClass type2 = new TypeClass(TypeEnum.POISON, null);
+		TypeClass type1 = new TypeClass(TypeEnum.NORMAL, null);
 		
 		type1 = typeClassRepo.save(type1);
-		type2 = typeClassRepo.save(type2);
 		
-		p1.setType1(type1);
-		p1.setType2(type2);
+		a1.setTypeAttaque(type1);
 		
-		p1 = pokemonRepo.save(p1);
+		a1 = attaqueRepo.save(a1);
 
 	
 		//Assert.assertEquals((Integer)5, p1.getId());
-		Assert.assertEquals("Bulbizarre", p1.getNom());
-		Assert.assertEquals((Integer)200, p1.getHp());
-		Assert.assertEquals((Integer)92, p1.getAttaque());
-		Assert.assertEquals((Integer)92, p1.getDefense());
-		Assert.assertEquals((Integer)121, p1.getAttaqueSpe());
-		Assert.assertEquals((Integer)121, p1.getDefenseSpe());
-		Assert.assertEquals((Integer)85, p1.getSpeed());
-		Assert.assertEquals((Float)0.7f, p1.getTaille());
-		Assert.assertEquals((Float)6.9f, p1.getPoids());
-		Assert.assertEquals((Integer)1, p1.getGeneration());
-		Assert.assertEquals(null, p1.getAvatar());
-		Assert.assertEquals("A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.", p1.getDescription());
-		Assert.assertEquals(4, p1.getAttaques().size());
-		Assert.assertEquals(TypeEnum.PLANTE, p1.getType1().getType());
-		Assert.assertEquals(TypeEnum.POISON, p1.getType2().getType());
+		Assert.assertEquals("Charge", a1.getNom());
+		Assert.assertEquals(CategorieAttaque.PHYSIQUE, a1.getCategorie());
+		Assert.assertEquals((Integer)35, a1.getPointDePouvoir());
+		Assert.assertEquals((Integer)40, a1.getPuissance());
+		Assert.assertEquals((Float)100f, a1.getPrecisionAttaque());
+		Assert.assertEquals("Le lanceur charge l'ennemi et le percute de tout son poids.", a1.getDescription());
+		Assert.assertEquals(4, a1.getPokemons().size());
+		Assert.assertEquals(TypeEnum.NORMAL, a1.getTypeAttaque().getType());
 		
+		attaqueRepo.delete(a1);
+		pokemonRepo.delete(p4);
+		pokemonRepo.delete(p3);
+		pokemonRepo.delete(p2);
 		pokemonRepo.delete(p1);
 		typeClassRepo.delete(type1);
-		typeClassRepo.delete(type2);
+		
 	}
 	
 	@Test
-	public void pokemonUpdate() {
-		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
+	public void attaqueUpdate() {
+		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
 		
-		String nom = "Bulbizarre";
-		Integer hp = 200;
-		Integer attaque = 92;
-		Integer defense = 92;
-		Integer attaqueSpe = 121;
-		Integer defenseSpe = 121;
-		Integer speed = 85;
-		Float taille = 0.7f;
-		Float poids = 6.9f;
-		Integer generation = 1;
-		String avatar = null;
-		String description = "A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.";
-		Pokemon p = new Pokemon(nom, hp, attaque, defense, attaqueSpe, defenseSpe, speed, taille, poids, generation, avatar, description);
+		String nom = "Charge";
+		CategorieAttaque categorie = CategorieAttaque.PHYSIQUE;
+		Integer pointDePouvoir = 35;
+		Integer puissance = 40;
+		Float precisionAttaque = 100f;
+		String description = "Le lanceur charge l'ennemi et le percute de tout son poids.";
+			
+		Attaque a = new Attaque(nom, categorie, pointDePouvoir, puissance, precisionAttaque, description);
 		
-		p = pokemonRepo.save(p);
+		a = attaqueRepo.save(a);
 		
-		p.setAttaque(95);
-		p = pokemonRepo.save(p);
+		a.setPointDePouvoir(34);
+		a = attaqueRepo.save(a);
 		
-		Pokemon pFind = pokemonRepo.findById(p.getId());
+		Attaque pFind = attaqueRepo.findById(a.getId());
 		
-		Assert.assertEquals((Integer)95, pFind.getAttaque());
+		Assert.assertEquals((Integer)34, pFind.getPointDePouvoir());
 	
-		pokemonRepo.delete(p); 
+		attaqueRepo.delete(a);
 	}
 }

@@ -151,7 +151,7 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			tx.begin();
 
 			TypedQuery<Pokemon> query = em.createQuery(
-					"select * from Pokemon p WHERE p.type1 = :type1 AND p.type2 = :type2",
+					"select p from Pokemon p WHERE p.type1.type = :type1 AND p.type2.type = :type2",
 					Pokemon.class);
 
 			query.setParameter("type1", type1);
