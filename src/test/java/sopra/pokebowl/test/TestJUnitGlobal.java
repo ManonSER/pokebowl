@@ -14,13 +14,15 @@ public class TestJUnitGlobal {
 		TestJUnitPokemonMatch testPokemonMatch = new TestJUnitPokemonMatch();
 		TestJUnitEquipe testEquipe = new TestJUnitEquipe();
 		TestJUnitMonPokemon testMonPokemon = new TestJUnitMonPokemon();
+		TestJUnitTypeClass testTypeClass = new TestJUnitTypeClass();
 		
 		testSalon.salonCreate(); 
 		testSalon.salonUpdate(); 
 		testSalon.salonFindAllAndDelete(); 
+		testSalon.salonFindSalonWithMDP();
 		
 		testTour.tourCreate();
-		testTour.tourUpdate();
+		testTour.tourUpdate();  
 		testTour.tourFindAllAndDelete();  
 		
 		testPokemonMatch.pokemonMatchCreate();
@@ -40,12 +42,18 @@ public class TestJUnitGlobal {
 		testEquipe.equipeCreate();
 		testEquipe.equipeUpdate();
 		testEquipe.equipeFindById();
-		testEquipe.equipeFindAllAndDelete();
+		testEquipe.equipeFindAllAndDelete();  
+		testEquipe.equipeFindEquipeByUtilisateurId();
 		
 		testMonPokemon.monPokeCreate();
 		testMonPokemon.monPokeUpdate();
 		testMonPokemon.monPokeFindById();
 		testMonPokemon.monPokeFindAllAndDelete();
+		
+		testTypeClass.typeClassCreate();
+		testTypeClass.typeClassUpdate();
+		testTypeClass.typeClassFindById();
+		testTypeClass.typeClassFindAllAndDelete();
 		
 		
 	} 
