@@ -353,4 +353,58 @@ public class TestJUnitUtilisateur {
 		pokeRepo.delete(pp1);
  
 	}
+	
+	@Test
+	public void utilisateurFindUtilisateurbyPseudoMdp() {
+		IUtilisateurRepository utilisateurRepo = Application.getInstance().getUtilisateurRepo();
+		
+		Utilisateur u = new Utilisateur();
+		u.setPseudo("PokeMan");
+		u.setMotDePasse("Pokeman1");
+		
+		u = utilisateurRepo.save(u);
+		
+		Utilisateur result = utilisateurRepo.findUtilisateurbyPseudoMdp("PokeMan", "Pokeman1");
+		
+		Assert.assertEquals("PokeMan", result.getPseudo());  
+		Assert.assertEquals("Pokeman1", result.getMotDePasse());
+	
+		
+		utilisateurRepo.delete(u);
+	}
+	
+	@Test
+	public void utilisateurFindPseudobyPseudo() {
+		IUtilisateurRepository utilisateurRepo = Application.getInstance().getUtilisateurRepo();
+		
+		Utilisateur u = new Utilisateur();
+		u.setPseudo("PokeMan");
+		
+		u = utilisateurRepo.save(u);
+		
+		Utilisateur result = utilisateurRepo.findPseudobyPseudo(u.getPseudo());
+		
+		Assert.assertEquals("PokeMan", result.getPseudo());  
+		
+		utilisateurRepo.delete(u);
+	}
+	
+	@Test
+	public void utilisateurfindEmailbyUtilisateur() {
+		IUtilisateurRepository utilisateurRepo = Application.getInstance().getUtilisateurRepo();
+		
+		Utilisateur u = new Utilisateur();
+		u.setPseudo("PokeMan");
+		u.setEmail("pokeman@gmail.com");
+		
+		u = utilisateurRepo.save(u);
+		
+		Utilisateur result = utilisateurRepo.findEmailbyUtilisateur(u.getEmail());
+		
+		Assert.assertEquals("pokeman@gmail.com", result.getEmail());  
+		
+		utilisateurRepo.delete(u);
+	}
+	
+	
 }

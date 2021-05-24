@@ -165,6 +165,105 @@ public class UtilisateurRepositoryJpa  implements IUtilisateurRepository {
 		}
 		return resultat;
 	}
+
+	@Override
+	public Utilisateur findUtilisateurbyPseudoMdp(String pseudo, String motDePasse) {
+		Utilisateur utilisateur = null;
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		
+		
+		try {
+			em = Application.getInstance().getEmf().createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			
+			TypedQuery<Utilisateur> query = em.createQuery("select u from Utilisateur u where u.pseudo = :pseudo and u.motDePasse = :mot_de_passe", Utilisateur.class);
+			
+			query.setParameter("pseudo", pseudo);
+			query.setParameter("mot_de_passe", motDePasse);
+			
+			utilisateur = query.getSingleResult();
+			
+			tx.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			if(tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+		} finally {
+			if(em != null) {
+				em.close();
+			}
+		}
+		
+		return utilisateur;
+	}
+
+	@Override
+	public Utilisateur findPseudobyPseudo(String pseudo) {
+		Utilisateur utilisateur = null;
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		
+		try {
+			em = Application.getInstance().getEmf().createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			
+			TypedQuery<Utilisateur> query = em.createQuery("select u from Utilisateur u where u.pseudo = :pseudo", Utilisateur.class);
+			
+			query.setParameter("pseudo", pseudo);
+			
+			utilisateur = query.getSingleResult();
+			
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if(tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+		} finally {
+			if(em != null) {
+				em.close();
+			}
+		}
+		
+		return utilisateur;
+	}
+
+	@Override
+	public Utilisateur findEmailbyUtilisateur(String email) {
+		Utilisateur utilisateur = null;
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		
+		try {
+			em = Application.getInstance().getEmf().createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			
+			TypedQuery<Utilisateur> query = em.createQuery("select u from Utilisateur u where u.email = :email", Utilisateur.class);
+			
+			query.setParameter("email", email);
+			
+			utilisateur = query.getSingleResult();
+			
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if(tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+		} finally {
+			if(em != null) {
+				em.close();
+			}
+		}
+		
+		return utilisateur;
+	}
 	
 }
 	
