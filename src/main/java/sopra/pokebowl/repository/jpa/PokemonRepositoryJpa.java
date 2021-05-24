@@ -102,6 +102,7 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			if(em != null) {
 				em.close();
 			}
+			
 		}
 		
 		return avatar;
@@ -241,5 +242,4 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 		}
 		return attaques;
 	}
-
 }
