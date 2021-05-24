@@ -314,4 +314,46 @@ public class TestJUnitPokemon {
 		typeClassRepo.delete(type2);
 	}
 
+	@Test
+	public void testFindAllAttaquesPokemonById() {
+		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
+		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
+		
+		Pokemon p = new Pokemon("Rondoudou", (Integer)102, (Integer)56, (Integer)59, (Integer)87, (Integer)91, (Integer)121, 0.65F, 2.5F, (Integer)1, "http://Rondoudou", "Description Rondoudou");
+		
+		Attaque a1 = new Attaque();
+		a1.setNom("Attaque 1");
+		a1 = attaqueRepo.save(a1);
+		
+		Attaque a2 = new Attaque();
+		a2.setNom("Attaque 2");
+		a2 = attaqueRepo.save(a2);
+		
+		Attaque a3 = new Attaque();
+		a3.setNom("Attaque 3");
+		a3 = attaqueRepo.save(a3);
+		
+		p.getAttaques().add(a1);
+		p.getAttaques().add(a2);
+		p.getAttaques().add(a3);
+		
+		p = pokemonRepo.save(p);
+		
+		System.out.println("COUCOU " + p.getId());
+		
+		Assert.assertEquals(3, p.getAttaques().size());
+		
+		List<Attaque> result = pokemonRepo.findAllAttaquesPokemonById(p.getId());
+		
+		Assert.assertEquals(3, result.size());
+		Assert.assertEquals(a1.getNom(), result.get(0).getNom());
+		Assert.assertEquals(a2.getNom(), result.get(1).getNom());
+		Assert.assertEquals(a3.getNom(), result.get(2).getNom());
+		
+		pokemonRepo.delete(p);
+		attaqueRepo.delete(a3);
+		attaqueRepo.delete(a2);
+		attaqueRepo.delete(a1);
+		
+	}
 }
