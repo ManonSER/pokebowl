@@ -40,6 +40,9 @@ public class TestJUnitGlobal {
 		testUtilisateur.utilisateurFindAllAndDelete();  
 		testUtilisateur.testFindPseudoMailAvatarStatsById();
 		testUtilisateur.testFindAvatarsPokeAllEquipesById();
+		testUtilisateur.utilisateurFindUtilisateurbyPseudoMdp();
+		testUtilisateur.utilisateurFindPseudobyPseudo();
+		testUtilisateur.utilisateurfindEmailbyUtilisateur();
 		
 		testEquipe.equipeCreate();
 		testEquipe.equipeUpdate();
@@ -67,6 +70,8 @@ public class TestJUnitGlobal {
 		testAttaque.attaqueCreate();
 		testAttaque.attaqueUpdate();
 		testAttaque.attaqueFindAllAndDelete();
+		
+		
 		
 		
 	} 

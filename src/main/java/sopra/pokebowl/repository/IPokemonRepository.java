@@ -10,4 +10,5 @@ public interface IPokemonRepository extends IRepository<Pokemon, Long> {
 	public List<Attaque> findAllAttaquesPokemonById(Long id);
 	public List<Pokemon> findAllPokemonByType(TypeEnum type1, TypeEnum type2);
 	public List<Pokemon> findAllPokemonByString(String recherche);
+
 }
