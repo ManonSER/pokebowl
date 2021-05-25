@@ -109,6 +109,7 @@ public class TestJUnitEquipe {
 		monPokeRepo.delete(p3);
 		monPokeRepo.delete(p2);
 		monPokeRepo.delete(p1);
+		
 	}
 	
 	@Test
@@ -130,7 +131,7 @@ public class TestJUnitEquipe {
 		e.setNom("hello");
 		e.setNumero(2);
 		
-		e = equipeRepo.save(e);
+		e = equipeRepo.save(e); 
 		
 		Optional<Equipe> eFind = equipeRepo.findById(e.getId());
 		
@@ -140,7 +141,7 @@ public class TestJUnitEquipe {
 		Assert.assertEquals("A16 : ", (Integer)2, eFind.get().getNumero());
 		
 		equipeRepo.delete(e); 
-
+		
 	}
 
 	@Test
@@ -193,6 +194,7 @@ public class TestJUnitEquipe {
 		utilRepo.delete(u1);
 		utilRepo.delete(u2);
 		utilRepo.delete(u3);
+		
 		
 	}
 }

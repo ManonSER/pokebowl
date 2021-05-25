@@ -42,6 +42,7 @@ public class TestJUnitAttaque {
 		
 		Assert.assertEquals(0, list.size());
 		
+		
 	}
 	
 	@Test

@@ -13,4 +13,5 @@ public interface IEquipeRepository extends JpaRepository<Equipe, Long> {
 	@Query("select e from Equipe e where e.utilisateurEquipeSauv.id = :idutil")
 	List<Equipe> findEquipesByUtilisateurId(@Param("idutil") Long id);
 	
+	
 }
