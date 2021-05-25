@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="mon_pokemon")
@@ -16,9 +17,10 @@ public class MonPokemon {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Version
+	private int version;
 	@Column(name="ordre")
 	private Integer ordre;
-	
 	@ManyToOne
 	@JoinColumn(name="id_equipe")
 	private Equipe equipe;
@@ -157,6 +159,14 @@ public class MonPokemon {
 
 	public void setPokeMatch(PokemonMatch pokeMatch) {
 		this.pokeMatch = pokeMatch;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 	
 	

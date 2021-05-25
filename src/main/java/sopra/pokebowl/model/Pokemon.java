@@ -1,5 +1,6 @@
 package sopra.pokebowl.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "Pokemon")
@@ -18,6 +20,8 @@ public class Pokemon {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Version
+	private int version;
 	@Column(name="nom")
 	private String nom;
 	@Column(name="hp")
@@ -43,8 +47,8 @@ public class Pokemon {
 	@Column(name="description", length = 255)
 	private String description;
 	@ManyToMany
-	@JoinTable(name = "attaque_pokemon", joinColumns = @JoinColumn(name = "attaque_id"), inverseJoinColumns = @JoinColumn(name = "pokemon_id"))
-	private List<Attaque> attaques;
+	@JoinTable(name = "attaque_pokemon", joinColumns = @JoinColumn(name = "pokemon_id"), inverseJoinColumns = @JoinColumn(name = "attaque_id"))
+	private List<Attaque> attaques = new ArrayList<Attaque>();
 	@OneToOne
 	@JoinColumn(name = "type1")
 	private TypeClass type1;
@@ -58,11 +62,10 @@ public class Pokemon {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pokemon(Long id, String nom, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
+	public Pokemon(String nom, Integer hp, Integer attaque, Integer defense, Integer attaqueSpe,
 			Integer defenseSpe, Integer speed, Float taille, Float poids, Integer generation, String avatar,
 			String description) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.hp = hp;
 		this.attaque = attaque;
@@ -266,7 +269,13 @@ public class Pokemon {
 	public void setType2(TypeClass type2) {
 		this.type2 = type2;
 	}
-	
-	
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 	
 }

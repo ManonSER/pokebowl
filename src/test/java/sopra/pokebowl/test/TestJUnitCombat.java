@@ -8,6 +8,7 @@ import org.junit.Test;
 import sopra.pokebowl.Application;
 import sopra.pokebowl.model.Combat;
 import sopra.pokebowl.model.Equipe;
+import sopra.pokebowl.model.Pokemon;
 import sopra.pokebowl.model.Salon;
 import sopra.pokebowl.model.Utilisateur;
 import sopra.pokebowl.repository.ICombatRepository;
@@ -78,11 +79,13 @@ public class TestJUnitCombat {
 		
 		combat = combatRepo.save(combat);
 		
-		Combat combatFind = combatRepo.save(combat);
+		combat = combatRepo.save(combat);
+		
+		Combat combatFind = combatRepo.findById(combat.getId());
 		
 		Assert.assertEquals((Long)12L, combatFind.getIdUtilisateurGagnant());
 		
-		combatRepo.delete(combat); 
+		combatRepo.delete(combat);
 	}
 	
 	@Test

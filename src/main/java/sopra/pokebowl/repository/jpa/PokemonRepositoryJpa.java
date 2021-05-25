@@ -102,6 +102,7 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			if(em != null) {
 				em.close();
 			}
+			
 		}
 		
 		return avatar;
@@ -151,7 +152,7 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			tx.begin();
 
 			TypedQuery<Pokemon> query = em.createQuery(
-					"select * from Pokemon p WHERE p.type1 = :type1 AND p.type2 = :type2",
+					"select p from Pokemon p WHERE p.type1.type = :type1 AND p.type2.type = :type2",
 					Pokemon.class);
 
 			query.setParameter("type1", type1);
@@ -221,9 +222,9 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 			tx.begin();
 
 			TypedQuery<Attaque> query = em.createQuery(
-					"select p.attaques from Pokemon p where p.id = :idutil",
+					"select a from Attaque a inner join a.pokemons pa where pa.id = :idpoke",
 					Attaque.class);
-			query.setParameter("idutil", id);
+			query.setParameter("idpoke", id);
 
 			attaques = query.getResultList();
 
@@ -241,5 +242,4 @@ public class PokemonRepositoryJpa implements IPokemonRepository{
 		}
 		return attaques;
 	}
-
 }

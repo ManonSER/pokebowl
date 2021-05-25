@@ -14,6 +14,9 @@ public class TestJUnitGlobal {
 		TestJUnitPokemonMatch testPokemonMatch = new TestJUnitPokemonMatch();
 		TestJUnitEquipe testEquipe = new TestJUnitEquipe();
 		TestJUnitMonPokemon testMonPokemon = new TestJUnitMonPokemon();
+		TestJUnitTypeClass testTypeClass = new TestJUnitTypeClass();
+		TestJUnitPokemon testPokemon = new TestJUnitPokemon();  
+		TestJUnitAttaque testAttaque = new TestJUnitAttaque();
 		
 		testSalon.salonCreate(); 
 		testSalon.salonUpdate(); 
@@ -37,6 +40,9 @@ public class TestJUnitGlobal {
 		testUtilisateur.utilisateurFindAllAndDelete();  
 		testUtilisateur.testFindPseudoMailAvatarStatsById();
 		testUtilisateur.testFindAvatarsPokeAllEquipesById();
+		testUtilisateur.utilisateurFindUtilisateurbyPseudoMdp();
+		testUtilisateur.utilisateurFindPseudobyPseudo();  
+		testUtilisateur.utilisateurfindEmailbyUtilisateur();
 		
 		testEquipe.equipeCreate();
 		testEquipe.equipeUpdate();
@@ -48,6 +54,24 @@ public class TestJUnitGlobal {
 		testMonPokemon.monPokeUpdate();
 		testMonPokemon.monPokeFindById();
 		testMonPokemon.monPokeFindAllAndDelete();
+		
+		testTypeClass.typeClassCreate();
+		testTypeClass.typeClassUpdate();
+		testTypeClass.typeClassFindById();
+		testTypeClass.typeClassFindAllAndDelete();
+		
+		testPokemon.pokemonCreate();
+		testPokemon.pokemonUpdate();
+		testPokemon.pokemonFindAllAndDelete();
+		testPokemon.pokemonFindAllPokemonByString();
+		testPokemon.pokemonFindAllPokemonByType();
+		testPokemon.testFindAllAttaquesPokemonById();
+		
+		testAttaque.attaqueCreate();
+		testAttaque.attaqueUpdate();
+		testAttaque.attaqueFindAllAndDelete();
+		
+		
 		
 		
 	} 

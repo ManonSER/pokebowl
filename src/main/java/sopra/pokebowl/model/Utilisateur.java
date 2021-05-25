@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "utilisateur")
@@ -19,6 +20,8 @@ public class Utilisateur {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Version
+	private int version;
 	@Column(name = "pseudo")
 	private String pseudo;
 	@Column(name = "email")
@@ -120,5 +123,13 @@ public class Utilisateur {
 
 	public void setEquipesSauvegardees(List<Equipe> equipesSauvegardees) {
 		this.equipesSauvegardees = equipesSauvegardees;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 }

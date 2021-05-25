@@ -1,5 +1,6 @@
 package sopra.pokebowl.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "Attaque")
@@ -17,7 +19,9 @@ public class Attaque {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(name="non")
+	@Version
+	private int version;
+	@Column(name="nom")
 	private String nom;
 	@Column(name="categorie")
 	private CategorieAttaque categorie;
@@ -30,7 +34,7 @@ public class Attaque {
 	@Column(name="description", length = 255)
 	private String description;
 	@ManyToMany(mappedBy = "attaques")
-	private List<Pokemon> pokemons;
+	private List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	@OneToOne
 	@JoinColumn(name = "type_attaque")
 	private TypeClass typeAttaque;
@@ -43,10 +47,9 @@ public class Attaque {
 
 
 
-	public Attaque(Long id, String nom, CategorieAttaque categorie, Integer pointDePouvoir, Integer puissance,
+	public Attaque(String nom, CategorieAttaque categorie, Integer pointDePouvoir, Integer puissance,
 			Float precision, String description) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.categorie = categorie;
 		this.pointDePouvoir = pointDePouvoir;
@@ -54,7 +57,6 @@ public class Attaque {
 		this.precisionAttaque = precision;
 		this.description = description;
 	}
-
 
 
 	public Long getId() {
@@ -62,11 +64,9 @@ public class Attaque {
 	}
 
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 
 	public String getNom() {
@@ -74,11 +74,9 @@ public class Attaque {
 	}
 
 
-
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
 
 
 	public CategorieAttaque getCategorie() {
@@ -86,11 +84,9 @@ public class Attaque {
 	}
 
 
-
 	public void setCategorie(CategorieAttaque categorie) {
 		this.categorie = categorie;
 	}
-
 
 
 	public Integer getPointDePouvoir() {
@@ -98,11 +94,9 @@ public class Attaque {
 	}
 
 
-
 	public void setPointDePouvoir(Integer pointDePouvoir) {
 		this.pointDePouvoir = pointDePouvoir;
 	}
-
 
 
 	public Integer getPuissance() {
@@ -110,11 +104,9 @@ public class Attaque {
 	}
 
 
-
 	public void setPuissance(Integer puissance) {
 		this.puissance = puissance;
 	}
-
 
 
 	public Float getPrecisionAttaque() {
@@ -122,11 +114,9 @@ public class Attaque {
 	}
 
 
-
 	public void setPrecisionAttaque(Float precision) {
 		this.precisionAttaque = precision;
 	}
-
 
 
 	public String getDescription() {
@@ -134,11 +124,9 @@ public class Attaque {
 	}
 
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 
 	public List<Pokemon> getPokemons() {
@@ -146,11 +134,9 @@ public class Attaque {
 	}
 
 
-
 	public void setPokemons(List<Pokemon> pokemons) {
 		this.pokemons = pokemons;
 	}
-
 
 
 	public TypeClass getTypeAttaque() {
@@ -158,11 +144,16 @@ public class Attaque {
 	}
 
 
-
 	public void setTypeAttaque(TypeClass typeAttaque) {
 		this.typeAttaque = typeAttaque;
 	}
-	
-	
 
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	
 }
