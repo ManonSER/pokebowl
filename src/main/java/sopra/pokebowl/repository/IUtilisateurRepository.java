@@ -10,14 +10,10 @@ import org.springframework.data.repository.query.Param;
 import sopra.pokebowl.model.Utilisateur;
 
 public interface IUtilisateurRepository extends JpaRepository<Utilisateur, Long> {
+		
+	public Utilisateur findByPseudoAndMotDePasse(String pseudo, String motDePasse);
 	
-	@Query("select u from Utilisateur u where u.pseudo = :pseudo and u.motDePasse = :mot_de_passe")
-	public Utilisateur findUtilisateurbyPseudoMdp(@Param("pseudo") String pseudo, @Param("mot_de_passe") String motDePasse);
+	public Utilisateur findByPseudo(String pseudo);
 	
-	@Query("select u from Utilisateur u where u.pseudo = :pseudo")
-	public Utilisateur findPseudobyPseudo(@Param("pseudo") String pseudo);
-	
-	@Query("select u from Utilisateur u where u.email = :email")
-	public Utilisateur findEmailbyUtilisateur(@Param("email") String email);
-
+	public Utilisateur findByEmail(String email);
 }

@@ -18,8 +18,9 @@ public class TestJUnitSalon {
 
 	@Test
 	public void salonCreate() {
-		ISalonRepository salonRepo = context.getBean(ISalonRepository.class);
-		IUtilisateurRepository utilisateurRepo = context.getBean(IUtilisateurRepository.class);
+		
+		ISalonRepository salonRepo = context.getBean(ISalonRepository.class);   
+		IUtilisateurRepository utilisateurRepo = context.getBean(IUtilisateurRepository.class); 
 		 
 		Utilisateur joueur1 = new Utilisateur(); 
 		Utilisateur joueur2 = new Utilisateur();
@@ -33,7 +34,7 @@ public class TestJUnitSalon {
 		salon.setJoueur2(joueur2);   
 		
 		salon = salonRepo.save(salon);
-		
+	
 		Optional<Salon> salonFind = salonRepo.findById(salon.getId());
 		
 		Assert.assertEquals("salon des bg", salonFind.get().getNom());
@@ -122,6 +123,6 @@ public class TestJUnitSalon {
 		
 		salonRepo.delete(s1);
 		salonRepo.delete(s2);
-		salonRepo.delete(s3);
+		salonRepo.delete(s3); 
 	}
 }

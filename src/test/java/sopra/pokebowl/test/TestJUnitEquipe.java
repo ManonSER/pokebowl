@@ -131,7 +131,7 @@ public class TestJUnitEquipe {
 		e.setNom("hello");
 		e.setNumero(2);
 		
-		e = equipeRepo.save(e);
+		e = equipeRepo.save(e); 
 		
 		Optional<Equipe> eFind = equipeRepo.findById(e.getId());
 		
