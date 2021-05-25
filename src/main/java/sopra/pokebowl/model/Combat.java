@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "combat")
@@ -21,6 +22,8 @@ public class Combat {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Version
+	private int version;
 	@Column(name = "id_utilisateur_gagnant")
 	private Long idUtilisateurGagnant;
 	
@@ -90,5 +93,12 @@ public class Combat {
 		this.pokemonMatchs = pokemonMatchs;
 	}
 	
+	public int getVersion() {
+		return version;
+	}
+	
+	public void setVersion(int version) {
+		this.version = version;
+	}
 	
 }

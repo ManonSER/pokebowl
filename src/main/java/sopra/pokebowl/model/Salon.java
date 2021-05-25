@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "salon")
@@ -18,6 +19,8 @@ public class Salon {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Version
+	private int version;
 	@Column(name = "nom")
 	private String nom;
 	@Column(name = "mot_de_passe")
@@ -88,5 +91,13 @@ public class Salon {
 
 	public void setCombats(List<Combat> combats) {
 		this.combats = combats;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 }

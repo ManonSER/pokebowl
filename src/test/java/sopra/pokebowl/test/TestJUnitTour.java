@@ -1,11 +1,13 @@
 package sopra.pokebowl.test;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import sopra.pokebowl.Application;
+import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Action;
 import sopra.pokebowl.model.Combat;
 import sopra.pokebowl.model.PokemonMatch;
@@ -15,12 +17,13 @@ import sopra.pokebowl.repository.IPokemonMatchRepository;
 import sopra.pokebowl.repository.ITourRepository;
 
 public class TestJUnitTour {
-	
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
 	@Test
 	public void tourCreate() {
-		ITourRepository tourRepo = Application.getInstance().getTourRepo();
-		ICombatRepository combatRepo = Application.getInstance().getCombatRepo();
-		IPokemonMatchRepository pokemonMatchRepo = Application.getInstance().getPokemonMatchRepo();
+		ITourRepository tourRepo = context.getBean(ITourRepository.class);
+		ICombatRepository combatRepo = context.getBean(ICombatRepository.class);
+		IPokemonMatchRepository pokemonMatchRepo = context.getBean(IPokemonMatchRepository.class);
 		
 		Combat combat = new Combat();
 		combat = combatRepo.save(combat);
@@ -41,15 +44,15 @@ public class TestJUnitTour {
 		
 		tour = tourRepo.save(tour);
 		
-		Tour tourFind = tourRepo.findById(tour.getId());
+		Optional<Tour> tourFind = tourRepo.findById(tour.getId());
 		
-		Assert.assertEquals(Action.ATTAQUER, tourFind.getActionJoueur1());
-		Assert.assertEquals(Action.CHANGER, tourFind.getActionJoueur2());
-		Assert.assertEquals("Abattage", tourFind.getAttaquePokemon1());
-		Assert.assertEquals("Abîme", tourFind.getAttaquePokemon2());
-		Assert.assertEquals(combat.getId(), tourFind.getCombat().getId());
-		Assert.assertEquals(pokemon1.getNumero(), tourFind.getPokemonMatch1().getNumero());
-		Assert.assertEquals(pokemon2.getNumero(), tourFind.getPokemonMatch2().getNumero());  
+		Assert.assertEquals(Action.ATTAQUER, tourFind.get().getActionJoueur1());
+		Assert.assertEquals(Action.CHANGER, tourFind.get().getActionJoueur2());
+		Assert.assertEquals("Abattage", tourFind.get().getAttaquePokemon1());
+		Assert.assertEquals("Abîme", tourFind.get().getAttaquePokemon2());
+		Assert.assertEquals(combat.getId(), tourFind.get().getCombat().getId());
+		Assert.assertEquals(pokemon1.getNumero(), tourFind.get().getPokemonMatch1().getNumero());
+		Assert.assertEquals(pokemon2.getNumero(), tourFind.get().getPokemonMatch2().getNumero());  
 		
 		tourRepo.delete(tour);
 		combatRepo.delete(combat);
@@ -59,7 +62,7 @@ public class TestJUnitTour {
 	
 	@Test
 	public void tourUpdate() {
-		ITourRepository tourRepo = Application.getInstance().getTourRepo();
+		ITourRepository tourRepo = context.getBean(ITourRepository.class);
 		
 		Tour tour = new Tour();
 		tour.setActionJoueur1(Action.ATTAQUER);
@@ -76,19 +79,19 @@ public class TestJUnitTour {
 		
 		tour = tourRepo.save(tour);
 		
-		Tour tourFind = tourRepo.findById(tour.getId());
+		Optional<Tour> tourFind = tourRepo.findById(tour.getId());
 		
-		Assert.assertEquals(Action.CHANGER, tourFind.getActionJoueur1());
-		Assert.assertEquals(Action.ATTAQUER, tourFind.getActionJoueur2());
-		Assert.assertEquals("Abîme", tourFind.getAttaquePokemon1());
-		Assert.assertEquals("Abattage", tourFind.getAttaquePokemon2());
+		Assert.assertEquals(Action.CHANGER, tourFind.get().getActionJoueur1());
+		Assert.assertEquals(Action.ATTAQUER, tourFind.get().getActionJoueur2());
+		Assert.assertEquals("Abîme", tourFind.get().getAttaquePokemon1());
+		Assert.assertEquals("Abattage", tourFind.get().getAttaquePokemon2());
 		
 		tourRepo.delete(tour);
 	}
 	
 	@Test
 	public void tourFindAllAndDelete() {
-		ITourRepository tourRepo = Application.getInstance().getTourRepo();
+		ITourRepository tourRepo = context.getBean(ITourRepository.class);
 		
 		Tour tour1 = new Tour();
 		Tour tour2 = new Tour();

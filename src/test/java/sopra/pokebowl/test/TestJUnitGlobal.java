@@ -15,7 +15,7 @@ public class TestJUnitGlobal {
 		TestJUnitEquipe testEquipe = new TestJUnitEquipe();
 		TestJUnitMonPokemon testMonPokemon = new TestJUnitMonPokemon();
 		TestJUnitTypeClass testTypeClass = new TestJUnitTypeClass();
-		TestJUnitPokemon testPokemon = new TestJUnitPokemon();
+		TestJUnitPokemon testPokemon = new TestJUnitPokemon();  
 		TestJUnitAttaque testAttaque = new TestJUnitAttaque();
 		
 		testSalon.salonCreate(); 
@@ -41,7 +41,7 @@ public class TestJUnitGlobal {
 		testUtilisateur.testFindPseudoMailAvatarStatsById();
 		testUtilisateur.testFindAvatarsPokeAllEquipesById();
 		testUtilisateur.utilisateurFindUtilisateurbyPseudoMdp();
-		testUtilisateur.utilisateurFindPseudobyPseudo();
+		testUtilisateur.utilisateurFindPseudobyPseudo();  
 		testUtilisateur.utilisateurfindEmailbyUtilisateur();
 		
 		testEquipe.equipeCreate();
