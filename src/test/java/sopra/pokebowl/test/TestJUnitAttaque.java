@@ -2,16 +2,13 @@ package sopra.pokebowl.test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import sopra.pokebowl.Application;
+import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.CategorieAttaque;
 import sopra.pokebowl.model.Pokemon;
@@ -22,9 +19,11 @@ import sopra.pokebowl.repository.IPokemonRepository;
 import sopra.pokebowl.repository.ITypeClassRepository;
 
 public class TestJUnitAttaque {
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+	
 	@Test
 	public void attaqueFindAllAndDelete() {
-		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
+		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
 		
 		Attaque a1 = new Attaque();
 		Attaque a2 = new Attaque();
@@ -43,13 +42,15 @@ public class TestJUnitAttaque {
 		
 		Assert.assertEquals(0, list.size());
 		
+		context.close();
+		
 	}
 	
 	@Test
 	public void attaqueCreate() {
-		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
-		ITypeClassRepository typeClassRepo = Application.getInstance().getTypeClassRepo();
-		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
+		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
+		ITypeClassRepository typeClassRepo = context.getBean(ITypeClassRepository.class);
+		IPokemonRepository pokemonRepo = context.getBean(IPokemonRepository.class);
 		
 		String nom = "Charge";
 		CategorieAttaque categorie = CategorieAttaque.PHYSIQUE;
@@ -104,11 +105,12 @@ public class TestJUnitAttaque {
 		pokemonRepo.delete(p1);
 		typeClassRepo.delete(type1);
 		
+		context.close();
 	}
 	
 	@Test
 	public void attaqueUpdate() {
-		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
+		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
 		
 		String nom = "Charge";
 		CategorieAttaque categorie = CategorieAttaque.PHYSIQUE;
@@ -124,10 +126,12 @@ public class TestJUnitAttaque {
 		a.setPointDePouvoir(34);
 		a = attaqueRepo.save(a);
 		
-		Attaque pFind = attaqueRepo.findById(a.getId());
+		Optional<Attaque> pFind = attaqueRepo.findById(a.getId());
 		
-		Assert.assertEquals((Integer)34, pFind.getPointDePouvoir());
+		Assert.assertEquals((Integer)34, pFind.get().getPointDePouvoir());
 	
 		attaqueRepo.delete(a);
+		
+		context.close();
 	}
 }
