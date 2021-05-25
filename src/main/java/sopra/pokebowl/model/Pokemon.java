@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "Pokemon")
@@ -19,6 +20,8 @@ public class Pokemon {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Version
+	private int version;
 	@Column(name="nom")
 	private String nom;
 	@Column(name="hp")
@@ -266,7 +269,13 @@ public class Pokemon {
 	public void setType2(TypeClass type2) {
 		this.type2 = type2;
 	}
-	
-	
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 	
 }

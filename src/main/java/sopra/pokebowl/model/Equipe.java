@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="equipe")
@@ -20,6 +21,9 @@ public class Equipe {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@Version
+	private int version;
 	
 	@Column(name="numero")
 	private Integer numero;
@@ -127,11 +131,14 @@ public class Equipe {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
-	
-	
-	
-	
 
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	
 }
