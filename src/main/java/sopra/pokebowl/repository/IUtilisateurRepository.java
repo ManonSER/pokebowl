@@ -12,7 +12,8 @@ import sopra.pokebowl.model.Utilisateur;
 public interface IUtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 	
 	@Query("select u from Utilisateur u where u.pseudo = :pseudo and u.motDePasse = :mot_de_passe")
-	public Utilisateur findUtilisateurbyPseudoMdp(@Param("pseudo") String pseudo, @Param("motdepasse") String motDePasse);
+	public Utilisateur findUtilisateurbyPseudoMdp(@Param("pseudo") String pseudo, @Param("mot_de_passe") String motDePasse);
+	//PLANTE
 	
 	@Query("select u from Utilisateur u where u.pseudo = :pseudo")
 	public Utilisateur findPseudobyPseudo(@Param("pseudo") String pseudo);

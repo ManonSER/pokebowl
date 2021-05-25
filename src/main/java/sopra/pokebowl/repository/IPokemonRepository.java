@@ -14,9 +14,9 @@ public interface IPokemonRepository extends JpaRepository<Pokemon, Long> {
 	
 	@Query("select p.avatar from Pokemon p where p.nom = :nom")
 	String findAvatarWithNom(@Param("nom") String nom);
-	
-	@Query("select u.derniereEquipe.listPokemon from Utilisateur u where u.id = :id")
-	List<Pokemon> findPokemonsEquipePrecedenteUtilisateur(@Param("id") Long id);
+//	
+//	@Query("select u.derniereEquipe.listPokemon from Utilisateur u where u.id = :id")
+//	List<Pokemon> findPokemonsEquipePrecedenteUtilisateur(@Param("id") Long id); //PLANTE
 	
 	@Query("select p from Pokemon p WHERE p.type1.type = :type1 AND p.type2.type = :type2")
 	List<Pokemon> findAllPokemonByType(@Param("type1") TypeEnum type1, @Param("type2") TypeEnum type2);

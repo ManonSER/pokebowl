@@ -42,8 +42,6 @@ public class TestJUnitEquipe {
 		
 		Assert.assertEquals("A2 : ", 0, list.size());
 		
-		context.close();
-		
 	}
 	
 	@Test
@@ -111,8 +109,6 @@ public class TestJUnitEquipe {
 		monPokeRepo.delete(p3);
 		monPokeRepo.delete(p2);
 		monPokeRepo.delete(p1);
-		
-		context.close();
 	}
 	
 	@Test
@@ -144,8 +140,7 @@ public class TestJUnitEquipe {
 		Assert.assertEquals("A16 : ", (Integer)2, eFind.get().getNumero());
 		
 		equipeRepo.delete(e); 
-		
-		context.close();
+
 	}
 
 	@Test
@@ -198,8 +193,6 @@ public class TestJUnitEquipe {
 		utilRepo.delete(u1);
 		utilRepo.delete(u2);
 		utilRepo.delete(u3);
-		
-		context.close();
 		
 	}
 }

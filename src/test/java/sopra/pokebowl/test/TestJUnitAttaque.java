@@ -42,8 +42,6 @@ public class TestJUnitAttaque {
 		
 		Assert.assertEquals(0, list.size());
 		
-		context.close();
-		
 	}
 	
 	@Test
@@ -105,7 +103,6 @@ public class TestJUnitAttaque {
 		pokemonRepo.delete(p1);
 		typeClassRepo.delete(type1);
 		
-		context.close();
 	}
 	
 	@Test
@@ -132,6 +129,5 @@ public class TestJUnitAttaque {
 	
 		attaqueRepo.delete(a);
 		
-		context.close();
 	}
 }
