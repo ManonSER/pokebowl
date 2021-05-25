@@ -59,11 +59,13 @@ public class TestJUnitGlobal {
 		testTypeClass.typeClassUpdate();
 		testTypeClass.typeClassFindById();
 		testTypeClass.typeClassFindAllAndDelete();
+		
 		testPokemon.pokemonCreate();
 		testPokemon.pokemonUpdate();
 		testPokemon.pokemonFindAllAndDelete();
 		testPokemon.pokemonFindAllPokemonByString();
 		testPokemon.pokemonFindAllPokemonByType();
+		testPokemon.testFindAllAttaquesPokemonById();
 		
 		testAttaque.attaqueCreate();
 		testAttaque.attaqueUpdate();
