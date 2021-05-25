@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "tour")
@@ -18,6 +19,8 @@ public class Tour {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Version
+	private int version;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "actionJoueur1")
 	private Action actionJoueur1;
@@ -104,6 +107,13 @@ public class Tour {
 
 	public void setPokemonMatch2(PokemonMatch pokemonMatch2) {
 		this.pokemonMatch2 = pokemonMatch2;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}	
-	
 }

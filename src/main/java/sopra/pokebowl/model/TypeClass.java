@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "TypeClass")
@@ -14,6 +15,8 @@ public class TypeClass {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Version
+	private int version;
 	@Column(name="type")
 	@Enumerated(EnumType.STRING)
 	private TypeEnum type;
@@ -33,9 +36,9 @@ public class TypeClass {
 	public Long getId() {
 		return id;
 	}
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public TypeEnum getType() {
 		return type;
 	}
@@ -48,7 +51,12 @@ public class TypeClass {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-	
-	
-	
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 }

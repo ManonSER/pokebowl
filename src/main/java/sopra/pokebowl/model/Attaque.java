@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "Attaque")
@@ -18,6 +19,8 @@ public class Attaque {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Version
+	private int version;
 	@Column(name="nom")
 	private String nom;
 	@Column(name="categorie")
@@ -56,11 +59,9 @@ public class Attaque {
 	}
 
 
-
 	public Long getId() {
 		return id;
 	}
-
 
 
 	public void setId(Long id) {
@@ -68,11 +69,9 @@ public class Attaque {
 	}
 
 
-
 	public String getNom() {
 		return nom;
 	}
-
 
 
 	public void setNom(String nom) {
@@ -80,11 +79,9 @@ public class Attaque {
 	}
 
 
-
 	public CategorieAttaque getCategorie() {
 		return categorie;
 	}
-
 
 
 	public void setCategorie(CategorieAttaque categorie) {
@@ -92,11 +89,9 @@ public class Attaque {
 	}
 
 
-
 	public Integer getPointDePouvoir() {
 		return pointDePouvoir;
 	}
-
 
 
 	public void setPointDePouvoir(Integer pointDePouvoir) {
@@ -104,11 +99,9 @@ public class Attaque {
 	}
 
 
-
 	public Integer getPuissance() {
 		return puissance;
 	}
-
 
 
 	public void setPuissance(Integer puissance) {
@@ -116,11 +109,9 @@ public class Attaque {
 	}
 
 
-
 	public Float getPrecisionAttaque() {
 		return precisionAttaque;
 	}
-
 
 
 	public void setPrecisionAttaque(Float precision) {
@@ -128,11 +119,9 @@ public class Attaque {
 	}
 
 
-
 	public String getDescription() {
 		return description;
 	}
-
 
 
 	public void setDescription(String description) {
@@ -140,11 +129,9 @@ public class Attaque {
 	}
 
 
-
 	public List<Pokemon> getPokemons() {
 		return pokemons;
 	}
-
 
 
 	public void setPokemons(List<Pokemon> pokemons) {
@@ -152,17 +139,21 @@ public class Attaque {
 	}
 
 
-
 	public TypeClass getTypeAttaque() {
 		return typeAttaque;
 	}
 
 
-
 	public void setTypeAttaque(TypeClass typeAttaque) {
 		this.typeAttaque = typeAttaque;
 	}
-	
-	
 
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	
 }
