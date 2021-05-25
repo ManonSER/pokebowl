@@ -1,11 +1,13 @@
 package sopra.pokebowl.test;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import sopra.pokebowl.Application;
+import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Equipe;
 import sopra.pokebowl.model.MonPokemon;
 import sopra.pokebowl.model.Pokemon;
@@ -17,11 +19,12 @@ import sopra.pokebowl.repository.IPokemonRepository;
 import sopra.pokebowl.repository.IUtilisateurRepository;
 
 public class TestJUnitUtilisateur {
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
 	@Test
 	public void utilisateurCreate() {
-		IUtilisateurRepository utilisateurRepo = Application.getInstance().getUtilisateurRepo();
-		IEquipeRepository equipeRepo = Application.getInstance().getEquipeRepo();
+		IUtilisateurRepository utilisateurRepo = context.getBean(IUtilisateurRepository.class);
+		IEquipeRepository equipeRepo = context.getBean(IEquipeRepository.class);
 		 
 		Statistique stats = new Statistique();
 		stats.setPokemonPrefere("Carapuce");
@@ -46,17 +49,17 @@ public class TestJUnitUtilisateur {
 		
 		utilisateur = utilisateurRepo.save(utilisateur); 
 		
-		Utilisateur utilisateurFind = utilisateurRepo.findById(utilisateur.getId());
+		Optional<Utilisateur> utilisateurFind = utilisateurRepo.findById(utilisateur.getId());
 		 
-		Assert.assertEquals("pokemonator", utilisateurFind.getPseudo());
-		Assert.assertEquals("jean.jojo@gmail.com", utilisateurFind.getEmail());
-		Assert.assertEquals("chemin/avatar", utilisateurFind.getAvatar());
-		Assert.assertEquals("lesoleilbrille33", utilisateurFind.getMotDePasse());
-		Assert.assertEquals("Carapuce", utilisateurFind.getStatistique().getPokemonPrefere());
-		Assert.assertEquals((Integer)54, utilisateurFind.getStatistique().getNbrVictoires());
-		Assert.assertEquals((Integer)34, utilisateurFind.getStatistique().getNbrDefaites());
-		Assert.assertEquals(stats.getNbrPartiesJouees(), utilisateurFind.getStatistique().getNbrPartiesJouees());
-		Assert.assertEquals(derniereEquipe.getId(), utilisateurFind.getDerniereEquipe().getId());
+		Assert.assertEquals("pokemonator", utilisateurFind.get().getPseudo());
+		Assert.assertEquals("jean.jojo@gmail.com", utilisateurFind.get().getEmail());
+		Assert.assertEquals("chemin/avatar", utilisateurFind.get().getAvatar());
+		Assert.assertEquals("lesoleilbrille33", utilisateurFind.get().getMotDePasse());
+		Assert.assertEquals("Carapuce", utilisateurFind.get().getStatistique().getPokemonPrefere());
+		Assert.assertEquals((Integer)54, utilisateurFind.get().getStatistique().getNbrVictoires());
+		Assert.assertEquals((Integer)34, utilisateurFind.get().getStatistique().getNbrDefaites());
+		Assert.assertEquals(stats.getNbrPartiesJouees(), utilisateurFind.get().getStatistique().getNbrPartiesJouees());
+		Assert.assertEquals(derniereEquipe.getId(), utilisateurFind.get().getDerniereEquipe().getId());
 		
 		utilisateurRepo.delete(utilisateur);
 		equipeRepo.delete(derniereEquipe);
@@ -64,7 +67,7 @@ public class TestJUnitUtilisateur {
 	
 	@Test
 	public void utilisateurUpdate() {
-		IUtilisateurRepository utilisateurRepo = Application.getInstance().getUtilisateurRepo();
+		IUtilisateurRepository utilisateurRepo = context.getBean(IUtilisateurRepository.class);
 		
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setPseudo("pokemonator");
@@ -81,19 +84,19 @@ public class TestJUnitUtilisateur {
 		
 		utilisateur = utilisateurRepo.save(utilisateur);
 		
-		Utilisateur utilisateurFind = utilisateurRepo.findById(utilisateur.getId());
+		Optional<Utilisateur> utilisateurFind = utilisateurRepo.findById(utilisateur.getId());
 		
-		Assert.assertEquals("jeanyves", utilisateurFind.getPseudo());
-		Assert.assertEquals("alexis.dupond@hotmail.fr", utilisateurFind.getEmail()); 
-		Assert.assertEquals("disqueC/image/avatar4", utilisateurFind.getAvatar());
-		Assert.assertEquals("unplusdeux++", utilisateurFind.getMotDePasse());
+		Assert.assertEquals("jeanyves", utilisateurFind.get().getPseudo());
+		Assert.assertEquals("alexis.dupond@hotmail.fr", utilisateurFind.get().getEmail()); 
+		Assert.assertEquals("disqueC/image/avatar4", utilisateurFind.get().getAvatar());
+		Assert.assertEquals("unplusdeux++", utilisateurFind.get().getMotDePasse());
 		
 		utilisateurRepo.delete(utilisateur);
 	}
 	
 	@Test
 	public void utilisateurFindAllAndDelete() {
-		IUtilisateurRepository utilisateurRepo = Application.getInstance().getUtilisateurRepo();
+		IUtilisateurRepository utilisateurRepo = context.getBean(IUtilisateurRepository.class);
 		
 		Utilisateur utilisateur1 = new Utilisateur();
 		Utilisateur utilisateur2 = new Utilisateur();
@@ -121,7 +124,7 @@ public class TestJUnitUtilisateur {
 	
 	@Test
 	public void testFindPseudoMailAvatarStatsById() {
-		IUtilisateurRepository utilisateurRepo = Application.getInstance().getUtilisateurRepo();
+		IUtilisateurRepository utilisateurRepo = context.getBean(IUtilisateurRepository.class);
 		
 		Utilisateur u = new Utilisateur();
 		u.setPseudo("PokeMan");
@@ -158,10 +161,10 @@ public class TestJUnitUtilisateur {
 	
 	@Test
 	public void testFindAvatarsPokeAllEquipesById() {
-		IUtilisateurRepository utilisateurRepo = Application.getInstance().getUtilisateurRepo();
-		IPokemonRepository pokeRepo = Application.getInstance().getPokemonRepo();
-		IMonPokemonRepository monPokeRepo = Application.getInstance().getMonPokemonRepo();
-		IEquipeRepository equipeRepo = Application.getInstance().getEquipeRepo();
+		IUtilisateurRepository utilisateurRepo = context.getBean(IUtilisateurRepository.class);
+		IPokemonRepository pokeRepo = context.getBean(IPokemonRepository.class);
+		IMonPokemonRepository monPokeRepo = context.getBean(IMonPokemonRepository.class);
+		IEquipeRepository equipeRepo = context.getBean(IEquipeRepository.class);
 		
 		// CREATION DES POKEMONS DE REFERENCE
 		Pokemon pp1 = new Pokemon();

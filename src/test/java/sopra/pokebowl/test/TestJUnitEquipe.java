@@ -2,11 +2,13 @@ package sopra.pokebowl.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import sopra.pokebowl.Application;
+import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Equipe;
 import sopra.pokebowl.model.MonPokemon;
 import sopra.pokebowl.model.Utilisateur;
@@ -16,9 +18,12 @@ import sopra.pokebowl.repository.IUtilisateurRepository;
 
 public class TestJUnitEquipe {
 	
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+	
 	@Test
 	public void equipeFindAllAndDelete() {
-		IEquipeRepository equipeRepo = Application.getInstance().getEquipeRepo();
+		
+		IEquipeRepository equipeRepo = context.getBean(IEquipeRepository.class);
 		
 		Equipe e1 = new Equipe();
 		Equipe e2 = new Equipe();
@@ -37,30 +42,30 @@ public class TestJUnitEquipe {
 		
 		Assert.assertEquals("A2 : ", 0, list.size());
 		
+		context.close();
+		
 	}
 	
 	@Test
 	public void equipeFindById() {
-		IEquipeRepository equipeRepo = Application.getInstance().getEquipeRepo();
+		IEquipeRepository equipeRepo = context.getBean(IEquipeRepository.class);
 		
 		Equipe e1 = new Equipe();
 		e1.setNbrPokemons(4);
 		e1 = equipeRepo.save(e1);
 		
-		Equipe e2 = equipeRepo.findById(e1.getId());
-		e2 = equipeRepo.save(e2);
+		Optional<Equipe> e2 = equipeRepo.findById(e1.getId());
 		
-		Assert.assertEquals("A3 : ", (Integer)4, e2.getNbrPokemons());
+		Assert.assertEquals("A3 : ", (Integer)4, e2.get().getNbrPokemons());
 		
 		equipeRepo.delete(e1);
-		equipeRepo.delete(e2);
 	}
 	
 	@Test
 	public void equipeCreate() {
-		IEquipeRepository equipeRepo = Application.getInstance().getEquipeRepo();
-		IMonPokemonRepository monPokeRepo = Application.getInstance().getMonPokemonRepo();
-		IUtilisateurRepository utilRepo = Application.getInstance().getUtilisateurRepo();
+		IEquipeRepository equipeRepo = context.getBean(IEquipeRepository.class);
+		IMonPokemonRepository monPokeRepo = context.getBean(IMonPokemonRepository.class);
+		IUtilisateurRepository utilRepo = context.getBean(IUtilisateurRepository.class);
 		
 		MonPokemon p1 = new MonPokemon();
 		MonPokemon p2 = new MonPokemon();
@@ -106,11 +111,15 @@ public class TestJUnitEquipe {
 		monPokeRepo.delete(p3);
 		monPokeRepo.delete(p2);
 		monPokeRepo.delete(p1);
+		
+		context.close();
 	}
 	
 	@Test
 	public void equipeUpdate() {
-		IEquipeRepository equipeRepo = Application.getInstance().getEquipeRepo();
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		
+		IEquipeRepository equipeRepo = context.getBean(IEquipeRepository.class);
 		
 		Equipe e = new Equipe();
 		e.setNbrPokemons(4);
@@ -127,20 +136,23 @@ public class TestJUnitEquipe {
 		
 		e = equipeRepo.save(e);
 		
-		Equipe eFind = equipeRepo.findById(e.getId());
+		Optional<Equipe> eFind = equipeRepo.findById(e.getId());
 		
-		Assert.assertEquals("A13 : ", (Integer)6, eFind.getNbrPokemons());
-		Assert.assertEquals("A14 : ", false, eFind.getFavorite());
-		Assert.assertEquals("A15 : ", "hello", eFind.getNom());
-		Assert.assertEquals("A16 : ", (Integer)2, eFind.getNumero());
+		Assert.assertEquals("A13 : ", (Integer)6, eFind.get().getNbrPokemons());
+		Assert.assertEquals("A14 : ", false, eFind.get().getFavorite());
+		Assert.assertEquals("A15 : ", "hello", eFind.get().getNom());
+		Assert.assertEquals("A16 : ", (Integer)2, eFind.get().getNumero());
 		
 		equipeRepo.delete(e); 
+		
+		context.close();
 	}
 
 	@Test
 	public void equipeFindEquipeByUtilisateurId() {
-		IEquipeRepository equipeRepo = Application.getInstance().getEquipeRepo();
-		IUtilisateurRepository utilRepo = Application.getInstance().getUtilisateurRepo();
+		
+		IEquipeRepository equipeRepo = context.getBean(IEquipeRepository.class);
+		IUtilisateurRepository utilRepo = context.getBean(IUtilisateurRepository.class);
 		
 		Equipe e1 = new Equipe();
 		Equipe e2 = new Equipe();
@@ -187,6 +199,7 @@ public class TestJUnitEquipe {
 		utilRepo.delete(u2);
 		utilRepo.delete(u3);
 		
+		context.close();
 		
 	}
 }
