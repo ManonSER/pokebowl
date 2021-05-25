@@ -38,8 +38,7 @@ public class TestJUnitGlobal {
 		testUtilisateur.utilisateurCreate(); 
 		testUtilisateur.utilisateurUpdate();
 		testUtilisateur.utilisateurFindAllAndDelete();  
-		testUtilisateur.testFindPseudoMailAvatarStatsById();
-		testUtilisateur.testFindAvatarsPokeAllEquipesById();
+//		testUtilisateur.testFindAvatarsPokeAllEquipesById();
 		testUtilisateur.utilisateurFindUtilisateurbyPseudoMdp();
 		testUtilisateur.utilisateurFindPseudobyPseudo();  
 		testUtilisateur.utilisateurfindEmailbyUtilisateur();
