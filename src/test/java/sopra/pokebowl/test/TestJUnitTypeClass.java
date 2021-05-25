@@ -1,19 +1,23 @@
 package sopra.pokebowl.test;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import sopra.pokebowl.Application;
+import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.TypeClass;
 import sopra.pokebowl.model.TypeEnum;
 import sopra.pokebowl.repository.ITypeClassRepository;
 
 public class TestJUnitTypeClass {
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
 	@Test
 	public void typeClassFindAllAndDelete() {
-		ITypeClassRepository typeClassRepo = Application.getInstance().getTypeClassRepo();
+		ITypeClassRepository typeClassRepo = context.getBean(ITypeClassRepository.class);
 		
 		TypeClass t1 = new TypeClass();
 		TypeClass t2 = new TypeClass();
@@ -36,26 +40,24 @@ public class TestJUnitTypeClass {
 	
 	@Test
 	public void typeClassFindById() {
-		ITypeClassRepository typeClassRepo = Application.getInstance().getTypeClassRepo();
+		ITypeClassRepository typeClassRepo = context.getBean(ITypeClassRepository.class);
 		
 		TypeClass t1 = new TypeClass();
 		t1.setType(TypeEnum.ACIER);
 		t1.setAvatar("http://Acier");
 		t1 = typeClassRepo.save(t1);
 		
-		TypeClass t2 = typeClassRepo.findById(t1.getId());
-		t2 = typeClassRepo.save(t2);
+		Optional<TypeClass> t2 = typeClassRepo.findById(t1.getId());
 		
-		Assert.assertEquals("http://Acier", t2.getAvatar());
-		Assert.assertEquals(TypeEnum.ACIER, t2.getType());
+		Assert.assertEquals("http://Acier", t2.get().getAvatar());
+		Assert.assertEquals(TypeEnum.ACIER, t2.get().getType());
 		
 		typeClassRepo.delete(t1);
-		typeClassRepo.delete(t2);
 	}
 	
 	@Test
 	public void typeClassCreate() {
-		ITypeClassRepository typeClassRepo = Application.getInstance().getTypeClassRepo();
+		ITypeClassRepository typeClassRepo = context.getBean(ITypeClassRepository.class);
 		
 		TypeClass t1 = new TypeClass(TypeEnum.COMBAT, "http://Combat");
 
@@ -69,7 +71,7 @@ public class TestJUnitTypeClass {
 	
 	@Test
 	public void typeClassUpdate() {
-		ITypeClassRepository typeClassRepo = Application.getInstance().getTypeClassRepo();
+		ITypeClassRepository typeClassRepo = context.getBean(ITypeClassRepository.class);
 		
 		TypeClass t = new TypeClass();
 		t.setType(TypeEnum.DRAGON);
@@ -81,10 +83,10 @@ public class TestJUnitTypeClass {
 		
 		t = typeClassRepo.save(t);
 		
-		TypeClass tFind = typeClassRepo.findById(t.getId());
+		Optional<TypeClass> tFind = typeClassRepo.findById(t.getId());
 		
-		Assert.assertEquals(TypeEnum.DRAGON, tFind.getType());
-		Assert.assertEquals("http://DragonNew", tFind.getAvatar());
+		Assert.assertEquals(TypeEnum.DRAGON, tFind.get().getType());
+		Assert.assertEquals("http://DragonNew", tFind.get().getAvatar());
 	
 		typeClassRepo.delete(t); 
 	}

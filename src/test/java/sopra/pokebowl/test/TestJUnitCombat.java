@@ -1,14 +1,15 @@
 package sopra.pokebowl.test;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import sopra.pokebowl.Application;
+import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Combat;
 import sopra.pokebowl.model.Equipe;
-import sopra.pokebowl.model.Pokemon;
 import sopra.pokebowl.model.Salon;
 import sopra.pokebowl.model.Utilisateur;
 import sopra.pokebowl.repository.ICombatRepository;
@@ -17,13 +18,14 @@ import sopra.pokebowl.repository.ISalonRepository;
 import sopra.pokebowl.repository.IUtilisateurRepository;
 
 public class TestJUnitCombat {
-
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+	
 	@Test
 	public void combatCreate() {
-		ICombatRepository combatRepo = Application.getInstance().getCombatRepo();
-		IEquipeRepository equipeRepo = Application.getInstance().getEquipeRepo();
-		ISalonRepository salonRepo = Application.getInstance().getSalonRepo();
-		IUtilisateurRepository utilisateurRepo = Application.getInstance().getUtilisateurRepo();
+		ICombatRepository combatRepo = context.getBean(ICombatRepository.class);
+		IEquipeRepository equipeRepo = context.getBean(IEquipeRepository.class);
+		ISalonRepository salonRepo = context.getBean(ISalonRepository.class);
+		IUtilisateurRepository utilisateurRepo = context.getBean(IUtilisateurRepository.class);
 		
 		Utilisateur joueur1 = new Utilisateur();
 		Utilisateur joueur2 = new Utilisateur();
@@ -63,12 +65,14 @@ public class TestJUnitCombat {
 		
 		equipeRepo.delete(equipeJoueur1);
 		equipeRepo.delete(equipeJoueur2);
+		
+		context.close();
 	  
 	}
 	
 	@Test
 	public void combatUpdate() {
-		ICombatRepository combatRepo = Application.getInstance().getCombatRepo();
+		ICombatRepository combatRepo = context.getBean(ICombatRepository.class);
 		
 		Combat combat = new Combat();
 		combat.setIdUtilisateurGagnant(45L);
@@ -81,16 +85,18 @@ public class TestJUnitCombat {
 		
 		combat = combatRepo.save(combat);
 		
-		Combat combatFind = combatRepo.findById(combat.getId());
+		Optional<Combat> combatFind = combatRepo.findById(combat.getId());
 		
-		Assert.assertEquals((Long)12L, combatFind.getIdUtilisateurGagnant());
+		Assert.assertEquals((Long)12L, combatFind.get().getIdUtilisateurGagnant());
 		
 		combatRepo.delete(combat);
+		
+		context.close();
 	}
 	
 	@Test
 	public void combatFindAllAndDelete() {
-		ICombatRepository combatRepo = Application.getInstance().getCombatRepo();
+		ICombatRepository combatRepo = context.getBean(ICombatRepository.class);
 		
 		Combat combat1 = new Combat();
 		Combat combat2 = new Combat();
@@ -114,6 +120,8 @@ public class TestJUnitCombat {
 		combats = combatRepo.findAll();
 		
 		Assert.assertEquals(0, combats.size());
+		
+		context.close();
 	}
 	
  }
