@@ -2,6 +2,6 @@ package sopra.pokebowl.repository;
 
 import sopra.pokebowl.model.TypeClass;
 
-public interface ITypeClassRepository extends IRepository<TypeClass, Long>{
+public interface ITypeClassRepository extends JpaRepository<TypeClass, Long>{
 
 }
