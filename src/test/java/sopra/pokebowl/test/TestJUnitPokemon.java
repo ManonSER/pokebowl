@@ -2,11 +2,13 @@ package sopra.pokebowl.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import sopra.pokebowl.Application;
+import sopra.pokebowl.AppConfig;
 import sopra.pokebowl.model.Attaque;
 import sopra.pokebowl.model.Pokemon;
 import sopra.pokebowl.model.TypeClass;
@@ -16,9 +18,11 @@ import sopra.pokebowl.repository.IPokemonRepository;
 import sopra.pokebowl.repository.ITypeClassRepository;
 
 public class TestJUnitPokemon {
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
 	@Test
 	public void pokemonFindAllAndDelete() {
-		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
+		IPokemonRepository pokemonRepo = context.getBean(IPokemonRepository.class);
 		
 		Pokemon p1 = new Pokemon();
 		Pokemon p2 = new Pokemon();
@@ -41,9 +45,9 @@ public class TestJUnitPokemon {
 	
 	@Test
 	public void pokemonCreate() {
-		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
-		ITypeClassRepository typeClassRepo = Application.getInstance().getTypeClassRepo();
-		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
+		IPokemonRepository pokemonRepo = context.getBean(IPokemonRepository.class);
+		ITypeClassRepository typeClassRepo = context.getBean(ITypeClassRepository.class);
+		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
 		
 		String nom = "Bulbizarre";
 		Integer hp = 200;
@@ -118,7 +122,7 @@ public class TestJUnitPokemon {
 	
 	@Test
 	public void pokemonUpdate() {
-		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
+		IPokemonRepository pokemonRepo = context.getBean(IPokemonRepository.class);
 		
 		String nom = "Bulbizarre";
 		Integer hp = 200;
@@ -139,18 +143,18 @@ public class TestJUnitPokemon {
 		p.setAttaque(95);
 		p = pokemonRepo.save(p);
 		
-		Pokemon pFind = pokemonRepo.findById(p.getId());
+		Optional<Pokemon> pFind = pokemonRepo.findById(p.getId());
 		
-		Assert.assertEquals((Integer)95, pFind.getAttaque());
+		Assert.assertEquals((Integer)95, pFind.get().getAttaque());
 	
 		pokemonRepo.delete(p); 
 	}
 	
 	@Test
 	public void pokemonFindAllPokemonByType() {
-		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
-		ITypeClassRepository typeClassRepo = Application.getInstance().getTypeClassRepo();
-		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
+		IPokemonRepository pokemonRepo = context.getBean(IPokemonRepository.class);
+		ITypeClassRepository typeClassRepo = context.getBean(ITypeClassRepository.class);
+		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
 		
 		String nom = "Bulbizarre";
 		Integer hp = 200;
@@ -232,9 +236,9 @@ public class TestJUnitPokemon {
 	
 	@Test
 	public void pokemonFindAllPokemonByString() {
-		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
-		ITypeClassRepository typeClassRepo = Application.getInstance().getTypeClassRepo();
-		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
+		IPokemonRepository pokemonRepo = context.getBean(IPokemonRepository.class);
+		ITypeClassRepository typeClassRepo = context.getBean(ITypeClassRepository.class);
+		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
 		
 		String nom = "Bulbizarre";
 		Integer hp = 200;
@@ -316,8 +320,8 @@ public class TestJUnitPokemon {
 
 	@Test
 	public void testFindAllAttaquesPokemonById() {
-		IPokemonRepository pokemonRepo = Application.getInstance().getPokemonRepo();
-		IAttaqueRepository attaqueRepo = Application.getInstance().getAttaqueRepo();
+		IPokemonRepository pokemonRepo = context.getBean(IPokemonRepository.class);
+		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
 		
 		Pokemon p = new Pokemon("Rondoudou", (Integer)102, (Integer)56, (Integer)59, (Integer)87, (Integer)91, (Integer)121, 0.65F, 2.5F, (Integer)1, "http://Rondoudou", "Description Rondoudou");
 		
