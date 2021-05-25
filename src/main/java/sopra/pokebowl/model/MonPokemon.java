@@ -102,7 +102,6 @@ public class MonPokemon {
 	}
 
 
-
 	public Attaque getAttaque1() {
 		return attaque1;
 	}
