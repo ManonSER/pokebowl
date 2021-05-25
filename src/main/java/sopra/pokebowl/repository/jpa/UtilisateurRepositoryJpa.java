@@ -32,7 +32,7 @@ public class UtilisateurRepositoryJpa  implements IUtilisateurRepository {
 		} catch (Exception e) {
 			e.printStackTrace();
 			if(tx != null && tx.isActive()) {
-				tx.rollback();
+				tx.rollback();  
 			}
 		} finally {
 			if(em != null) {
@@ -123,6 +123,7 @@ public class UtilisateurRepositoryJpa  implements IUtilisateurRepository {
 			tx2 = em2.getTransaction();
 			tx.begin();
 			tx2.begin();
+
 
 			TypedQuery<Equipe> query = em.createQuery(
 					"select e from Equipe e where e.utilisateurEquipeSauv.id = :idutil",
