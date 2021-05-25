@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @PropertySource("classpath:db.properties")
 @ComponentScan("sopra.pokebowl")
-@EnableJpaRepositories("sopra.pokebowl.repository")
+@EnableJpaRepositories("sopra.pokebowl") 
 @EnableTransactionManagement
 public class AppConfig {
 
@@ -68,7 +68,7 @@ public class AppConfig {
 
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-		return new PersistenceExceptionTranslationPostProcessor();
+		return new PersistenceExceptionTranslationPostProcessor();  
 	}
 
 }
