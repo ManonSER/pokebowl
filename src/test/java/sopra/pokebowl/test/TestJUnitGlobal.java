@@ -16,12 +16,12 @@ public class TestJUnitGlobal {
 		TestJUnitMonPokemon testMonPokemon = new TestJUnitMonPokemon();
 		TestJUnitTypeClass testTypeClass = new TestJUnitTypeClass();
 		TestJUnitPokemon testPokemon = new TestJUnitPokemon();  
-		TestJUnitAttaque testAttaque = new TestJUnitAttaque();
+		TestJUnitAttaque testAttaque = new TestJUnitAttaque();  
 		
 		testSalon.salonCreate(); 
-		testSalon.salonUpdate(); 
-		testSalon.salonFindAllAndDelete(); 
-		testSalon.salonFindSalonWithMDP();
+//		testSalon.salonUpdate(); 
+//		testSalon.salonFindAllAndDelete(); 
+//		testSalon.salonFindSalonWithMDP();
 		
 		testTour.tourCreate();
 		testTour.tourUpdate();  
@@ -38,9 +38,8 @@ public class TestJUnitGlobal {
 		testUtilisateur.utilisateurCreate(); 
 		testUtilisateur.utilisateurUpdate();
 		testUtilisateur.utilisateurFindAllAndDelete();  
-		testUtilisateur.testFindPseudoMailAvatarStatsById();
-		testUtilisateur.testFindAvatarsPokeAllEquipesById();
-		testUtilisateur.utilisateurFindUtilisateurbyPseudoMdp();
+//		testUtilisateur.testFindAvatarsPokeAllEquipesById();  
+		testUtilisateur.testFindByPseudoAndMotDePasse(); 
 		testUtilisateur.utilisateurFindPseudobyPseudo();  
 		testUtilisateur.utilisateurfindEmailbyUtilisateur();
 		

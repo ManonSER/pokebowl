@@ -18,7 +18,7 @@ import sopra.pokebowl.repository.IPokemonRepository;
 import sopra.pokebowl.repository.ITypeClassRepository;
 
 public class TestJUnitPokemon {
-	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class); 
 
 	@Test
 	public void pokemonFindAllAndDelete() {
@@ -112,7 +112,7 @@ public class TestJUnitPokemon {
 		Assert.assertEquals(TypeEnum.POISON, p1.getType2().getType());
 		
 		pokemonRepo.delete(p1);
-		attaqueRepo.delete(a4);
+		attaqueRepo.delete(a4); 
 		attaqueRepo.delete(a3);
 		attaqueRepo.delete(a2);
 		attaqueRepo.delete(a1);
