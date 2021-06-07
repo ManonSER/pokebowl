@@ -68,6 +68,6 @@ public class TestJUnitGlobal {
 		
 		testAttaque.attaqueCreate();
 		testAttaque.attaqueUpdate();
-		testAttaque.attaqueFindAllAndDelete();
+		testAttaque.attaqueFindAllAndDelete(); 
 	} 
 }
