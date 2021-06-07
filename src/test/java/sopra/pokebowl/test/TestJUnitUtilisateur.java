@@ -121,7 +121,7 @@ public class TestJUnitUtilisateur {
 		
 		Assert.assertEquals(0, utilisateurs.size());    
 	}
- 
+	
 	@Test  
 	public void testFindByPseudoAndMotDePasse() {
 		IUtilisateurRepository utilisateurRepo = context.getBean(IUtilisateurRepository.class);

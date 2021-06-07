@@ -66,7 +66,6 @@ public class TestJUnitCombat {
 		equipeRepo.delete(equipeJoueur1);
 		equipeRepo.delete(equipeJoueur2);
 		
-		context.close();
 	  
 	}
 	
@@ -90,8 +89,6 @@ public class TestJUnitCombat {
 		Assert.assertEquals((Long)12L, combatFind.get().getIdUtilisateurGagnant());
 		
 		combatRepo.delete(combat);
-		
-		context.close();
 	}
 	
 	@Test
@@ -121,7 +118,6 @@ public class TestJUnitCombat {
 		
 		Assert.assertEquals(0, combats.size());
 		
-		context.close();
 	}
 	
  }
