@@ -14,46 +14,81 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "Pokemon")
 public class Pokemon {
 	@Id
 	@GeneratedValue
+	@JsonView(Views.ViewPokemon.class)
 	private Long id;
+	
 	@Version
+	@JsonView(Views.ViewPokemon.class)
 	private int version;
+	
 	@Column(name="nom")
+	@JsonView(Views.ViewPokemon.class)
 	private String nom;
+	
 	@Column(name="hp")
+	@JsonView(Views.ViewPokemon.class)
 	private Integer hp;
+	
 	@Column(name="attaque")
+	@JsonView(Views.ViewPokemon.class)
 	private Integer attaque;
+	
 	@Column(name="defense")
+	@JsonView(Views.ViewPokemon.class)
 	private Integer defense;
+	
 	@Column(name="attaque_spe")
+	@JsonView(Views.ViewPokemon.class)
 	private Integer attaqueSpe;
+	
 	@Column(name="defense_spe")
+	@JsonView(Views.ViewPokemon.class)
 	private Integer defenseSpe;
+	
 	@Column(name="speed")
+	@JsonView(Views.ViewPokemon.class)
 	private Integer speed;
+	
 	@Column(name="taille")
+	@JsonView(Views.ViewPokemon.class)
 	private Float taille;
+	
 	@Column(name="poids")
+	@JsonView(Views.ViewPokemon.class)
 	private Float poids;
+	
 	@Column(name="generation")
+	@JsonView(Views.ViewPokemon.class)
 	private Integer generation;
+	
 	@Column(name="avatar")
+	@JsonView(Views.ViewPokemon.class)
 	private String avatar;
+	
 	@Column(name="description", length = 255)
+	@JsonView(Views.ViewPokemon.class)
 	private String description;
+	
 	@ManyToMany
 	@JoinTable(name = "attaque_pokemon", joinColumns = @JoinColumn(name = "pokemon_id"), inverseJoinColumns = @JoinColumn(name = "attaque_id"))
+	@JsonView(Views.ViewPokemonDetail.class)
 	private List<Attaque> attaques = new ArrayList<Attaque>();
+	
 	@OneToOne
 	@JoinColumn(name = "type1")
+	@JsonView(Views.ViewPokemonDetail.class)
 	private TypeClass type1;
+	
 	@OneToOne
 	@JoinColumn(name = "type2")
+	@JsonView(Views.ViewPokemonDetail.class)
 	private TypeClass type2;
 	
 	
