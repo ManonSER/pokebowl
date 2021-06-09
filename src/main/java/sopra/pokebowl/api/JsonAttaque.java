@@ -14,7 +14,7 @@ public class JsonAttaque {
 	public final String effect_chance;
 	public final List<Object> effect_changes;
 	public final List<Object> effect_entries;
-	public final List<Object> flavor_text_entries;
+	public final List<JsonNode> flavor_text_entries;
 	public final JsonNode generation;
 	public final String id;
 	public final List<Object> learned_by_pokemon;
@@ -40,7 +40,7 @@ public class JsonAttaque {
     		@JsonProperty("effect_chance") String effect_chance,
     		@JsonProperty("effect_changes") List<Object> effect_changes,
     		@JsonProperty("effect_entries") List<Object> effect_entries,
-    		@JsonProperty("flavor_text_entries") List<Object> flavor_text_entries,
+    		@JsonProperty("flavor_text_entries") List<JsonNode> flavor_text_entries,
     		@JsonProperty("generation") JsonNode generation,
     		@JsonProperty("id") String id,
     		@JsonProperty("learned_by_pokemon") List<Object> learned_by_pokemon,
