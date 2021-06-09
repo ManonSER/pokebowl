@@ -6,12 +6,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PokemonAPIRequest {
 	public static final String nomPoke = "nomPoke";
+	public static final String nomPokeFR = "nomPokeFR";
 	public static final String hpPoke = "hpPoke";
 	public static final String attaquePoke = "attaquePoke";
 	public static final String defensePoke = "defensePoke";
@@ -26,7 +29,7 @@ public class PokemonAPIRequest {
 	public static final String type1Poke = "type1Poke";
 	public static final String type2Poke = "type2Poke";
 	
-	public static Map<String, String> createInfoPokemon(int i, String name) throws IOException {
+	public static Map<String, String> createInfoPokemon(int i, String name, List<String> listPoke) throws IOException {
 		Map<String, String> pokeInfo = new HashMap<String, String>();
 
 		// Get Pokemon by name or id
@@ -36,28 +39,43 @@ public class PokemonAPIRequest {
 		} else {
 			path = "https://pokeapi.co/api/v2/pokemon/" + name;
 		}
+		
+		String path2;
+		if(i != -1) {
+			path2 = "https://pokeapi.co/api/v2/pokemon-species/" + i;
+		} else {
+			path2 = "https://pokeapi.co/api/v2/pokemon-species/" + name;
+		}
 
 		// Create a neat value object to hold the URavatL
 		URL url = new URL(path);
+		URL url2 = new URL(path2);
 
 		// Open a connection(?) on the URL(??) and cast the response(???)
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		HttpURLConnection connection2 = (HttpURLConnection) url2.openConnection();
 
 		// Now it's "open", we can set the request method, headers etc.
 		connection.setRequestProperty("accept", "application/json");
+		connection2.setRequestProperty("accept", "application/json");
 
 		// This line makes the request
 		InputStream responseStream = connection.getInputStream();
+		InputStream responseStream2 = connection2.getInputStream();
 
 		// Manually converting the response body InputStream to APOD using Jackson
 		ObjectMapper mapper = new ObjectMapper();
+		ObjectMapper mapper2 = new ObjectMapper();
 		JsonPokemon pokemon = mapper.readValue(responseStream, JsonPokemon.class);
+		JSonPokemonSpecies pokemon2 = mapper2.readValue(responseStream2, JSonPokemonSpecies.class);
 
 		// Get Pokemon Id
 		pokeInfo.put("id", pokemon.id);
 
 		// Get Pokemon name
 		pokeInfo.put(nomPoke, pokemon.name);
+		
+		listPoke.add(pokemon.name);
 
 		// Get Pokemon stats
 		String[] stats = {hpPoke, attaquePoke, defensePoke, attaqueSpePoke, defenseSpePoke, speedPoke};
@@ -90,6 +108,24 @@ public class PokemonAPIRequest {
 
 		// Get Pokemon avatar
 		pokeInfo.put(avatarPoke, String.valueOf(pokemon.sprites.get("front_default")));
+		
+		for(int j=pokemon2.flavor_text_entries.size()-1; j>=0; j--) {
+			if(String.valueOf(pokemon2.flavor_text_entries.get(j).get("language").get("name")).equals("\"fr\"")) {
+				pokeInfo.put(descriptionPoke, String.valueOf(pokemon2.flavor_text_entries.get(j).get("flavor_text")).replace("\\n", " "));
+				break;
+			}
+		}
+		
+		if(!pokeInfo.containsKey("description")) {
+			pokeInfo.put(descriptionPoke, "No description.");
+		}
+		
+		for(JsonNode j : pokemon2.names) {
+			if((String.valueOf(j.get("language").get("name"))).equals("\"fr\"")) {
+				pokeInfo.put(nomPokeFR, String.valueOf(j.get("name")));
+				break;
+			}
+		}
 
 		return pokeInfo;
 	}
