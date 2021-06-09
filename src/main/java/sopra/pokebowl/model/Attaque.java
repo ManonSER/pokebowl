@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -24,6 +26,7 @@ public class Attaque {
 	@Column(name="nom")
 	private String nom;
 	@Column(name="categorie")
+	@Enumerated(EnumType.STRING)
 	private CategorieAttaque categorie;
 	@Column(name="pointDePouvoir")
 	private Integer pointDePouvoir;
