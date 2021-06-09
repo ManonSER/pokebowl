@@ -1,6 +1,8 @@
 package sopra.pokebowl.test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -19,6 +21,7 @@ public class TestJUnitAPI {
 	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 	public final Integer numberPokeToUse = 151;
 	public final Integer numberAttaqueToUse = 200;
+	public List<String> listPoke = new ArrayList<String>();
 	
 	@Test
 	public void createPokeDataBase() {
@@ -26,7 +29,7 @@ public class TestJUnitAPI {
 		
 		try {
 			for(int i = 1; i <= numberPokeToUse; i++) {
-				Map<String, String> pokemonInfo = PokemonAPIRequest.createInfoPokemon(i, null);
+				Map<String, String> pokemonInfo = PokemonAPIRequest.createInfoPokemon(i, null, listPoke);
 				Pokemon pokemon = new Pokemon();
 				pokemon.setNom(pokemonInfo.get(PokemonAPIRequest.nomPoke));
 				pokemon.setHp(Integer.parseInt(pokemonInfo.get(PokemonAPIRequest.hpPoke)));
@@ -39,6 +42,7 @@ public class TestJUnitAPI {
 				pokemon.setTaille(Float.parseFloat(pokemonInfo.get(PokemonAPIRequest.taillePoke)));
 				pokemon.setGeneration(1);
 				pokemon.setAvatar(pokemonInfo.get(PokemonAPIRequest.avatarPoke));
+				pokemon.setDescription(pokemonInfo.get(PokemonAPIRequest.descriptionPoke));
 				
 				pokemonRepo.save(pokemon);
 			}
@@ -53,7 +57,7 @@ public class TestJUnitAPI {
 		
 		try {
 			for(int i = 1; i <= numberAttaqueToUse; i++) {
-				Map<String, String> attaqueInfo = AttaqueAPIRequest.createAttaqueInfo(i);
+				Map<String, String> attaqueInfo = AttaqueAPIRequest.createAttaqueInfo(i, listPoke);
 				if(!attaqueInfo.isEmpty()) {
 					Attaque attaque = new Attaque();
 					
@@ -76,6 +80,14 @@ public class TestJUnitAPI {
 					if(attaqueInfo.get(AttaqueAPIRequest.precisionAttaque) != null) {
 						attaque.setPrecisionAttaque(Float.parseFloat(attaqueInfo.get(AttaqueAPIRequest.precisionAttaque)));
 					}
+					
+					if(attaqueInfo.get(AttaqueAPIRequest.descriptionAttaque) != null) {
+						attaque.setDescription(attaqueInfo.get(AttaqueAPIRequest.descriptionAttaque));
+					}
+					
+//					if(attaqueInfo.get(AttaqueAPIRequest.typeAttaque) != null) {
+//						attaque.setTypeAttaque();
+//					}
 					
 					attaqueRepo.save(attaque);
 				}

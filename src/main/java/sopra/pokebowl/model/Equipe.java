@@ -14,30 +14,40 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name="equipe")
 public class Equipe {
 	
 	@Id
 	@GeneratedValue
+	@JsonView(Views.ViewEquipe.class)
 	private Long id;
 	
 	@Version
+	@JsonView(Views.ViewEquipe.class)
 	private int version;
 	
 	@Column(name="numero")
+	@JsonView(Views.ViewEquipe.class)
 	private Integer numero;
 	@Column(name="nom")
+	@JsonView(Views.ViewEquipe.class)
 	private String nom;
 	@Column(name="favorite")
+	@JsonView(Views.ViewEquipe.class)
 	private Boolean favorite;
 	@Column(name="nbr_pokemons")
+	@JsonView(Views.ViewEquipe.class)
 	private Integer nbrPokemons;
 	
 	@ManyToOne
 	@JoinColumn(name="id_utilisateur")
+	@JsonView(Views.ViewEquipeDetail.class)
 	private Utilisateur utilisateurEquipeSauv;
 	@OneToOne(mappedBy="derniereEquipe")
+	@JsonView(Views.ViewEquipeDetail.class)
 	private Utilisateur utilisateurDeniereEquipe;
 	@OneToMany(mappedBy="equipe")
 	private List<MonPokemon> listPokemons = new ArrayList<MonPokemon>();

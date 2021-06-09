@@ -15,31 +15,42 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "Attaque")
 public class Attaque {
 	@Id
 	@GeneratedValue
+	@JsonView(Views.ViewAttaque.class)
 	private Long id;
 	@Version
+	@JsonView(Views.ViewAttaque.class)
 	private int version;
 	@Column(name="nom")
+	@JsonView(Views.ViewAttaque.class)
 	private String nom;
-	@Column(name="categorie")
 	@Enumerated(EnumType.STRING)
+	@Column(name="categorie", length=20)
+	@JsonView(Views.ViewAttaque.class)
 	private CategorieAttaque categorie;
 	@Column(name="pointDePouvoir")
+	@JsonView(Views.ViewAttaque.class)
 	private Integer pointDePouvoir;
 	@Column(name="puissance")
+	@JsonView(Views.ViewAttaque.class)
 	private Integer puissance;
 	@Column(name="precision_attaque")
+	@JsonView(Views.ViewAttaque.class)
 	private Float precisionAttaque;
 	@Column(name="description", length = 255)
+	@JsonView(Views.ViewAttaque.class)
 	private String description;
 	@ManyToMany(mappedBy = "attaques")
 	private List<Pokemon> pokemons = new ArrayList<Pokemon>();
 	@OneToOne
 	@JoinColumn(name = "type_attaque")
+	@JsonView(Views.ViewAttaqueDetail.class)
 	private TypeClass typeAttaque;
 	
 	
