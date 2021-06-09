@@ -15,30 +15,40 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "combat")
 public class Combat {
 
 	@Id
 	@GeneratedValue
+	@JsonView(Views.ViewCombat.class)
 	private Long id;
 	@Version
+	@JsonView(Views.ViewCombat.class)
 	private int version;
 	@Column(name = "id_utilisateur_gagnant")
+	@JsonView(Views.ViewCombat.class)
 	private Long idUtilisateurGagnant;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "salon_id")
+	@JsonView(Views.ViewCombatDetail.class)
 	private Salon salon;
 	@OneToMany(mappedBy = "combat")
+	@JsonView(Views.ViewCombatDetail.class)
 	private List<Tour> tours = new ArrayList<Tour>();
 	@OneToMany(mappedBy = "combat")
+	@JsonView(Views.ViewCombatDetail.class)
 	private List<PokemonMatch> pokemonMatchs = new ArrayList<PokemonMatch>();
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "equipe1")
+	@JsonView(Views.ViewCombatDetail.class)
 	private Equipe equipe1;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "equipe2")
+	@JsonView(Views.ViewCombatDetail.class)
 	private Equipe equipe2;
 	
 	

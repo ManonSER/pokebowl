@@ -13,32 +13,51 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "tour")
 public class Tour {
 	@Id
 	@GeneratedValue
+	@JsonView(Views.ViewTour.class)
 	private Long id;
+	
 	@Version
+	@JsonView(Views.ViewTour.class)
 	private int version;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "actionJoueur1")
+	@JsonView(Views.ViewTour.class)
 	private Action actionJoueur1;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "actionJoueur2")
+	@JsonView(Views.ViewTour.class)
 	private Action actionJoueur2;
+	
 	@Column(name = "attaquePokemon1")
+	@JsonView(Views.ViewTour.class)
 	private String attaquePokemon1;
+	
 	@Column(name = "attaquePokemon2")
+	@JsonView(Views.ViewTour.class)
 	private String attaquePokemon2;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "combat_id")
+	@JsonView(Views.ViewTourDetail.class)
 	private Combat combat;
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pokemonMatch1_id")
+	@JsonView(Views.ViewTourDetail.class)
 	private PokemonMatch pokemonMatch1;
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pokemonMatch2_id")
+	@JsonView(Views.ViewTourDetail.class)
 	private PokemonMatch pokemonMatch2;
 	
 	public Tour() {
