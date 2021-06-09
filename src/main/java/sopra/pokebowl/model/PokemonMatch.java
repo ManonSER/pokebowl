@@ -2,6 +2,8 @@ package sopra.pokebowl.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,45 +13,64 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "pokemon_match")
 public class PokemonMatch {
 	
 	@Id
 	@GeneratedValue
+	@JsonView(Views.ViewPokemonMatch.class)
 	private Integer numero;
 	@Version
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int version;
 	@Column(name = "hpMatch")
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int hpMatch;
 	@Column(name = "acttackMatch")
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int attackMatch;
 	@Column(name = "defenseMatch")
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int defenseMatch;
 	@Column(name = "specialAttackMatch")
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int specialAttackMatch;
 	@Column(name = "defenseActtackMatch")
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int specialDefenseMatch;
 	@Column(name = "speedMatch")
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int speedMatch;
 	@Column(name = "numAttaqueActive")
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int numAttaqueActive;
-	@Column(name = "statut")
+	@Enumerated(EnumType.STRING)
+	@Column(name = "statut", length=10)
+	@JsonView(Views.ViewPokemonMatch.class)
 	private Statut statut;
 	@Column(name = "ppAttaque1")
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int ppAttaque1;
 	@Column(name = "ppAttaque2")
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int ppAttaque2;
 	@Column(name = "ppAttaque3")
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int ppAttaque3;
 	@Column(name = "ppAttaque4")
+	@JsonView(Views.ViewPokemonMatch.class)
 	private int ppAttaque4;
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="monPokemon_id")
+	@JsonView(Views.ViewPokemonMatchDetail.class)
 	private MonPokemon monPokemon;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "combat_id")
+	@JsonView(Views.ViewPokemonMatchDetail.class)
 	private Combat combat;
 	
 	
