@@ -6,8 +6,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class AttaqueAPIRequest {
@@ -20,7 +22,7 @@ public class AttaqueAPIRequest {
 	public static final String typeAttaque = "typeAttaque";
 	public static final String pokemonAttaque = "pokemonAttaque";
 	
-	public static Map<String, String> createAttaqueInfo(Integer i) throws IOException {
+	public static Map<String, String> createAttaqueInfo(Integer i, List<String> listPoke) throws IOException {
 		Map<String, String> attaqueInfo = new HashMap<String, String>();
 		
 		String path = "https://pokeapi.co/api/v2/move/" + i;
@@ -63,22 +65,33 @@ public class AttaqueAPIRequest {
 			// Get Accuracy
 			attaqueInfo.put(precisionAttaque, attaque.accuracy);
 
-			// TODO
 			// récupérer le type
+			attaqueInfo.put(typeAttaque, String.valueOf(attaque.type.get("name")));
 
-			// TODO
 			// Utiliser une list de nom de pokemon faites avec les pokemons utilises
-			// Get Pokemons who can used Move
+			// Get Pokemons who can used Move			
 			StringBuilder pokemonMove = new StringBuilder();
-//			for (int j = 0; j < attaque.learned_by_pokemon.size(); j++) {
-//				LinkedHashMap<Object, Object> pokemon = (LinkedHashMap<Object, Object>) attaque.learned_by_pokemon.get(j);
-//				Map<String, String> pokeInfo = PokemonAPIRequest.createInfoPokemon(-1, (String) pokemon.get("name"));
-//				if (Integer.parseInt(pokeInfo.get("id")) <= 151) {
-//					pokemonMove.append(pokemon.get("name") + ", ");
-//				}
-//			}
+			for (int j = 0; j < attaque.learned_by_pokemon.size(); j++) {
+				LinkedHashMap<Object, Object> pokemon = (LinkedHashMap<Object, Object>) attaque.learned_by_pokemon.get(j);
+				if (listPoke.contains(pokemon.get("name"))) {
+					pokemonMove.append(pokemon.get("name") + ", ");
+				}
+			}
 
 			attaqueInfo.put(pokemonAttaque, String.valueOf(pokemonMove));
+			
+			//Get Description
+			for(JsonNode j : attaque.flavor_text_entries) {
+				if(String.valueOf(j.get("language").get("name")).equals("\"fr\"")) {
+					attaqueInfo.put(descriptionAttaque, (String.valueOf(j.get("flavor_text"))).replace("\\n", " "));
+					break;
+				}
+				
+			}
+			
+			if(!attaqueInfo.containsKey("description")){
+				attaqueInfo.put(descriptionAttaque, "No description.");
+			}
 		}
 
 		return attaqueInfo;
