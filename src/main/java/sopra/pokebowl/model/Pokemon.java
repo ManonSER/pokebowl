@@ -21,59 +21,59 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Pokemon {
 	@Id
 	@GeneratedValue
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	
 	@Version
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	
 	@Column(name="nom")
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private String nom;
 	
 	@Column(name="hp")
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer hp;
 	
 	@Column(name="attaque")
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer attaque;
 	
 	@Column(name="defense")
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer defense;
 	
 	@Column(name="attaque_spe")
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer attaqueSpe;
 	
 	@Column(name="defense_spe")
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer defenseSpe;
 	
 	@Column(name="speed")
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer speed;
 	
 	@Column(name="taille")
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Float taille;
 	
 	@Column(name="poids")
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Float poids;
 	
 	@Column(name="generation")
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer generation;
 	
 	@Column(name="avatar")
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private String avatar;
 	
 	@Column(name="description", length = 255)
-	@JsonView(Views.ViewPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private String description;
 	
 	@ManyToMany

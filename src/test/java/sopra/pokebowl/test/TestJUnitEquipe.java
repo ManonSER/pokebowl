@@ -180,9 +180,9 @@ public class TestJUnitEquipe {
 		e5 = equipeRepo.save(e5);
 		e6 = equipeRepo.save(e6);
 		
-		List<Equipe> equipeU1 = equipeRepo.findEquipesByUtilisateurId(u1.getId());
+		Optional<List<Equipe>> equipeU1 = equipeRepo.findEquipesByUtilisateurId(u1.getId());
 		
-		Assert.assertEquals(4, equipeU1.size());
+		Assert.assertEquals(4, equipeU1.get().size());
 		
 		equipeRepo.delete(e1);
 		equipeRepo.delete(e2);
