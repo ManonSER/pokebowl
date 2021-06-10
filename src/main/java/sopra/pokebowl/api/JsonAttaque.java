@@ -12,21 +12,21 @@ public class JsonAttaque {
 	public final JsonNode contest_type;
 	public final JsonNode damage_class;
 	public final String effect_chance;
-	public final List<Object> effect_changes;
-	public final List<Object> effect_entries;
-	public final List<Object> flavor_text_entries;
+	public final List<JsonNode> effect_changes;
+	public final List<JsonNode> effect_entries;
+	public final List<JsonNode> flavor_text_entries;
 	public final JsonNode generation;
 	public final String id;
-	public final List<Object> learned_by_pokemon;
-	public final List<Object> machines;
+	public final List<JsonNode> learned_by_pokemon;
+	public final List<JsonNode> machines;
 	public final JsonNode meta;
 	public final String name;
-	public final List<Object> names;
-	public final List<Object> past_values;
+	public final List<JsonNode> names;
+	public final List<JsonNode> past_values;
 	public final String power;
 	public final String pp;
 	public final String priority;
-	public final List<Object> stat_changes;
+	public final List<JsonNode> stat_changes;
 	public final JsonNode super_contest_effect;
 	public final JsonNode target;
 	public final JsonNode type;
@@ -38,21 +38,21 @@ public class JsonAttaque {
     		@JsonProperty("contest_type") JsonNode contest_type,
     		@JsonProperty("damage_class") JsonNode damage_class,
     		@JsonProperty("effect_chance") String effect_chance,
-    		@JsonProperty("effect_changes") List<Object> effect_changes,
-    		@JsonProperty("effect_entries") List<Object> effect_entries,
-    		@JsonProperty("flavor_text_entries") List<Object> flavor_text_entries,
+    		@JsonProperty("effect_changes") List<JsonNode> effect_changes,
+    		@JsonProperty("effect_entries") List<JsonNode> effect_entries,
+    		@JsonProperty("flavor_text_entries") List<JsonNode> flavor_text_entries,
     		@JsonProperty("generation") JsonNode generation,
     		@JsonProperty("id") String id,
-    		@JsonProperty("learned_by_pokemon") List<Object> learned_by_pokemon,
-    		@JsonProperty("machines") List<Object> machines,
+    		@JsonProperty("learned_by_pokemon") List<JsonNode> learned_by_pokemon,
+    		@JsonProperty("machines") List<JsonNode> machines,
     		@JsonProperty("meta") JsonNode meta,
     		@JsonProperty("name") String name,
-    		@JsonProperty("names") List<Object> names,
-    		@JsonProperty("past_values") List<Object> past_values,
+    		@JsonProperty("names") List<JsonNode> names,
+    		@JsonProperty("past_values") List<JsonNode> past_values,
     		@JsonProperty("power") String power,
     		@JsonProperty("pp") String pp,
     		@JsonProperty("priority") String priority,
-    		@JsonProperty("stat_changes") List<Object> stat_changes,
+    		@JsonProperty("stat_changes") List<JsonNode> stat_changes,
     		@JsonProperty("super_contest_effect") JsonNode super_contest_effect,
     		@JsonProperty("target") JsonNode target,
     		@JsonProperty("type") JsonNode type) {
