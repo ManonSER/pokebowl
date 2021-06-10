@@ -10,7 +10,7 @@ import sopra.pokebowl.model.Utilisateur;
 
 public interface IUtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 		
-	public Utilisateur findByPseudoAndMotDePasse(String pseudo, String motDePasse);
+	public Optional<Utilisateur> findByPseudoAndMotDePasse(String pseudo, String motDePasse);
 	
 	public Utilisateur findByPseudo(String pseudo);
 	

@@ -132,10 +132,10 @@ public class TestJUnitUtilisateur {
 		
 		u = utilisateurRepo.save(u);
 		
-		Utilisateur result = utilisateurRepo.findByPseudoAndMotDePasse("PokeMan", "Pokeman1");
+		Optional<Utilisateur> result = utilisateurRepo.findByPseudoAndMotDePasse("PokeMan", "Pokeman1");
 		
-		Assert.assertEquals("PokeMan", result.getPseudo());  
-		Assert.assertEquals("Pokeman1", result.getMotDePasse());
+		Assert.assertEquals("PokeMan", result.get().getPseudo());  
+		Assert.assertEquals("Pokeman1", result.get().getMotDePasse());
 	
 		
 		utilisateurRepo.delete(u);
