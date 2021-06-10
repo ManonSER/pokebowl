@@ -9,18 +9,27 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "TypeClass")
 public class TypeClass {
 	@Id
 	@GeneratedValue
+	@JsonView(Views.ViewTypeClass.class)
 	private Long id;
+	
 	@Version
+	@JsonView(Views.ViewTypeClass.class)
 	private int version;
+	
 	@Column(name="type")
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.ViewTypeClass.class)
 	private TypeEnum type;
+	
 	@Column(name="avatar")
+	@JsonView(Views.ViewTypeClass.class)
 	private String avatar;
 	
 	public TypeClass() {

@@ -14,30 +14,41 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "utilisateur")
 public class Utilisateur {
 	@Id
 	@GeneratedValue
+	@JsonView(Views.ViewUtilisateur.class)
 	private Long id;
 	@Version
+	@JsonView(Views.ViewUtilisateur.class)
 	private int version;
 	@Column(name = "pseudo")
+	@JsonView(Views.ViewUtilisateur.class)
 	private String pseudo;
 	@Column(name = "email")
+	@JsonView(Views.ViewUtilisateur.class)
 	private String email;
 	@Column(name = "avatar")
+	@JsonView(Views.ViewUtilisateur.class)
 	private String avatar;
 	@Column(name = "mot_de_passe")
+	@JsonView(Views.ViewUtilisateur.class)
 	private String motDePasse;
 	@Embedded
 	private Statistique statistique;
 	@OneToOne
 	@JoinColumn(name = "derniere_equipe_id")
+	@JsonView(Views.ViewUtilisateurDetail.class)
 	private Equipe derniereEquipe;
 	@OneToMany(mappedBy = "joueur1")
+	@JsonView(Views.ViewUtilisateurDetail.class)
 	private List<Salon> salons = new ArrayList<Salon>();
 	@OneToMany(mappedBy = "utilisateurEquipeSauv")
+	@JsonView(Views.ViewUtilisateurDetail.class)
 	private List<Equipe> equipesSauvegardees = new ArrayList<Equipe>();
 	
 	public Utilisateur() {
