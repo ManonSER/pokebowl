@@ -16,7 +16,7 @@ public class Views {
 	public static class ViewAttaqueDetail extends ViewAttaque {}
 	
 	public static class ViewUtilisateur extends ViewCommon{}
-	public static class ViewUtilisateurDetail extends ViewCommon{}
+	public static class ViewUtilisateurDetail extends ViewUtilisateur{}
 	
 	public static class ViewSalon extends ViewCommon{}
 	public static class ViewSalonDetail extends ViewSalon{}

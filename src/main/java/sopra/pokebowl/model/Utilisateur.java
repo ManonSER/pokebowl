@@ -40,7 +40,7 @@ public class Utilisateur {
 	@JsonView(Views.ViewUtilisateur.class)
 	private String motDePasse;
 	@Embedded
-	@JsonView(Views.ViewUtilisateurDetail.class)
+//	@JsonView(Views.ViewUtilisateurDetail.class)
 	private Statistique statistique;
 	@OneToOne
 	@JoinColumn(name = "derniere_equipe_id")
