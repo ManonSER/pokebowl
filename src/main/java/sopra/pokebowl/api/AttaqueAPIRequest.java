@@ -96,9 +96,9 @@ public class AttaqueAPIRequest {
 				
 			}
 			
-			if(!attaqueInfo.containsKey("description")){
-				attaqueInfo.put(descriptionAttaque, "No description.");
-			}
+//			if(!attaqueInfo.containsKey(descriptionAttaque)){
+//				attaqueInfo.put(descriptionAttaque, "No description.");
+//			}
 		}
 
 		return attaqueInfo;
