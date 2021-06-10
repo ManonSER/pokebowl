@@ -22,24 +22,24 @@ public class Equipe {
 	
 	@Id
 	@GeneratedValue
-	@JsonView(Views.ViewEquipe.class)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	
 	@Version
-	@JsonView(Views.ViewEquipe.class)
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	
 	@Column(name="numero")
-	@JsonView(Views.ViewEquipe.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer numero;
 	@Column(name="nom")
-	@JsonView(Views.ViewEquipe.class)
+	@JsonView(Views.ViewCommon.class)
 	private String nom;
 	@Column(name="favorite")
-	@JsonView(Views.ViewEquipe.class)
+	@JsonView(Views.ViewCommon.class)
 	private Boolean favorite;
 	@Column(name="nbr_pokemons")
-	@JsonView(Views.ViewEquipe.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer nbrPokemons;
 	
 	@ManyToOne
@@ -50,6 +50,7 @@ public class Equipe {
 	@JsonView(Views.ViewEquipeDetail.class)
 	private Utilisateur utilisateurDeniereEquipe;
 	@OneToMany(mappedBy="equipe")
+	@JsonView(Views.ViewEquipeDetail.class)
 	private List<MonPokemon> listPokemons = new ArrayList<MonPokemon>();
 	
 	public Equipe() {

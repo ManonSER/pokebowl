@@ -73,7 +73,7 @@ public class PokemonAPIRequest {
 		pokeInfo.put("id", pokemon.id);
 
 		// Get Pokemon name
-		pokeInfo.put(nomPoke, pokemon.name);
+		// pokeInfo.put(nomPoke, pokemon.name);
 		
 		listPoke.add(pokemon.name);
 
@@ -116,13 +116,9 @@ public class PokemonAPIRequest {
 			}
 		}
 		
-		if(!pokeInfo.containsKey("description")) {
-			pokeInfo.put(descriptionPoke, "No description.");
-		}
-		
 		for(JsonNode j : pokemon2.names) {
 			if((String.valueOf(j.get("language").get("name"))).equals("\"fr\"")) {
-				pokeInfo.put(nomPokeFR, String.valueOf(j.get("name")));
+				pokeInfo.put(nomPoke, String.valueOf(j.get("name")));
 				break;
 			}
 		}

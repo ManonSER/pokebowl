@@ -18,13 +18,13 @@ public class MonPokemon {
 	
 	@Id
 	@GeneratedValue
-	@JsonView(Views.ViewMonPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Long id;
 	@Version
-	@JsonView(Views.ViewMonPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private int version;
 	@Column(name="ordre")
-	@JsonView(Views.ViewMonPokemon.class)
+	@JsonView(Views.ViewCommon.class)
 	private Integer ordre;
 	@ManyToOne
 	@JoinColumn(name="id_equipe")
@@ -32,7 +32,7 @@ public class MonPokemon {
 	private Equipe equipe;
 	@OneToOne
 	@JoinColumn(name="id_pokemon")
-	@JsonView(Views.ViewMonPokemonDetail.class)
+	@JsonView(Views.ViewEquipeDetail.class)
 	private Pokemon pokeReference;
 	@OneToOne
 	@JoinColumn(name="id_attaque1")

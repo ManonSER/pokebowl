@@ -24,6 +24,11 @@ public class TestJUnitAPI {
 	public List<String> listPoke = new ArrayList<String>();
 	
 	@Test
+	public void createAllData() {
+		createPokeDataBase();
+		createAttaqueDataBase();
+	}
+	
 	public void createPokeDataBase() {
 		IPokemonRepository pokemonRepo = context.getBean(IPokemonRepository.class);
 		
@@ -51,7 +56,6 @@ public class TestJUnitAPI {
 		}
 	}
 	
-	@Test
 	public void createAttaqueDataBase() {
 		IAttaqueRepository attaqueRepo = context.getBean(IAttaqueRepository.class);
 		

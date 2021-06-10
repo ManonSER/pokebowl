@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -39,13 +40,16 @@ public class Utilisateur {
 	@JsonView(Views.ViewUtilisateur.class)
 	private String motDePasse;
 	@Embedded
+//	@JsonView(Views.ViewUtilisateurDetail.class)
 	private Statistique statistique;
 	@OneToOne
 	@JoinColumn(name = "derniere_equipe_id")
-	@JsonView(Views.ViewUtilisateurDetail.class)
+//	@JsonView(Views.ViewUtilisateurDetail.class)
+	@JsonIgnore
 	private Equipe derniereEquipe;
 	@OneToMany(mappedBy = "joueur1")
-	@JsonView(Views.ViewUtilisateurDetail.class)
+//	@JsonView(Views.ViewUtilisateurDetail.class)
+	@JsonIgnore
 	private List<Salon> salons = new ArrayList<Salon>();
 	@OneToMany(mappedBy = "utilisateurEquipeSauv")
 	@JsonView(Views.ViewUtilisateurDetail.class)

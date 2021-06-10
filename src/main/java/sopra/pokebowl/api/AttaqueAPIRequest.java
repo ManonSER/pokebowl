@@ -22,6 +22,7 @@ public class AttaqueAPIRequest {
 	public static final String typeAttaque = "typeAttaque";
 	public static final String pokemonAttaque = "pokemonAttaque";
 	
+	@SuppressWarnings("unlikely-arg-type")
 	public static Map<String, String> createAttaqueInfo(Integer i, List<String> listPoke) throws IOException {
 		Map<String, String> attaqueInfo = new HashMap<String, String>();
 		
@@ -51,7 +52,13 @@ public class AttaqueAPIRequest {
 			attaqueInfo.put("id", attaque.id);
 
 			// Get name
-			attaqueInfo.put(nomAttaque, attaque.name);
+			for(JsonNode j : attaque.names) {
+				if(String.valueOf(j.get("language").get("name")).equals("\"fr\"")) {
+					attaqueInfo.put(nomAttaque, String.valueOf(j.get("name")));
+					break;
+				}
+			}
+			
 
 			// Get Damage Class (catégorie attaque)
 			attaqueInfo.put(categorieAttaque, String.valueOf(attaque.damage_class.get("name")));
@@ -72,7 +79,7 @@ public class AttaqueAPIRequest {
 			// Get Pokemons who can used Move			
 			StringBuilder pokemonMove = new StringBuilder();
 			for (int j = 0; j < attaque.learned_by_pokemon.size(); j++) {
-				LinkedHashMap<Object, Object> pokemon = (LinkedHashMap<Object, Object>) attaque.learned_by_pokemon.get(j);
+				JsonNode pokemon = attaque.learned_by_pokemon.get(j);
 				if (listPoke.contains(pokemon.get("name"))) {
 					pokemonMove.append(pokemon.get("name") + ", ");
 				}
